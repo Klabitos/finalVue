@@ -16,7 +16,7 @@ const routes = [
     component: Clasificacion
   },
   {
-    path: '/clasificacion/:equipo',
+    path: '/clasificacion/:nombreEquipo',
     name: 'ClasificacionEquipo',
     component: ClasificacionEquipo
   },
