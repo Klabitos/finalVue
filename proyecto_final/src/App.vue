@@ -8,22 +8,25 @@
         <div class="col-12 header">
           <h1 class="display-1">La Liga</h1>
         </div>
-        <div class="col ms-4 realContent">
-          <router-link to="/"></router-link>
+      </div>
+      <div class="row">
+        <div class="col-11 content mt-2">
           <router-view></router-view>
-          <FillInicio></FillInicio>
         </div>
       </div>
+        
+    
     </div>
   </div>
 </template>
 <script>
 import Menu from "../src/components/Menu.vue";
-import FillInicio from "../src/components/FillInicio.vue";
 export default {
   components: {
-    Menu,
-    FillInicio
+    Menu
+  },
+  created() {
+    this.$router.push({name:"Home"})
   },
 };
 </script>
@@ -34,7 +37,8 @@ export default {
 }
 .header h1 {
   width: 99%;
-  background-color: black;
+  background-color: rgb(32, 32, 32);
+  border-bottom: 3px solid black;
   color: white;
 }
 
@@ -44,7 +48,7 @@ export default {
 
 .menu {
   height: 100vh;
-  background-color: #212529;
+  background-color: rgb(32, 32, 32);
   color:white
 }
 #app {
@@ -60,4 +64,11 @@ a {
   text-decoration: none !important;
   color: white;
 }
+.content{
+
+  border: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;     
+  background-color: rgb(71, 71, 71);
+  }
 </style>

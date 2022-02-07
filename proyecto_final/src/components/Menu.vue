@@ -5,7 +5,10 @@
             <nav class="nav d-flex flex-column ps-2 me-5 align-items-start">
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-house"></i>
-                    - Inicio</a>
+                    <router-link to="/inicio">
+                        - Inicio
+                    </router-link>
+                    </a>
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-sort-up"></i>
                     - Clasificación</a>
@@ -61,6 +64,9 @@ export default {
 </style>
 
 <style scoped>
+    a{
+        color: white;
+    }
     li a{
         color: grey;
         transition: color .15s ease-in-out;
