@@ -14,10 +14,10 @@
                 <tr v-for="(equipo, index) in this.listaEquipos" :key="index">
                     <th scope="row">{{index+1}}</th>
                     <td>
-                         <img :src="image" alt="Girl in a jacket" width="50" height="50"> 
+                          <img :src="require('../assets/escudos/'+equipo.id+'.png')" alt="Girl in a jacket" width="50" height="50">  
                     </td>
                     <td>{{equipo.name}}</td>
-                    <td>@mdo</td>
+                    <td>{{equipo.path}}</td>
                     <td>21</td>
                 </tr>
             </tbody>
@@ -32,9 +32,7 @@ export default {
     data(){
         return{
             listaEquipos:[],
-            path: "../assets/escudos/3.png",
-            str: 2,
-            image: require("../assets/escudos/"+this.str+".png")
+            image: require("../assets/escudos/2.png")
         }
     },
     methods: {
@@ -43,9 +41,6 @@ export default {
             .then(response => this.listaEquipos = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
         },
-        obtenerRutaConId(){
-            return "../assets/escudos/3.png";
-        }
     },
     created() {
         this.obtenerListaEquipos();
