@@ -11,7 +11,10 @@
                     </a>
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-sort-up"></i>
-                    - Clasificación</a>
+                     <router-link to="/clasificacion">
+                    - Clasificación
+                    </router-link>
+                    </a>
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-calendar-week"></i>
                     - Jornadas

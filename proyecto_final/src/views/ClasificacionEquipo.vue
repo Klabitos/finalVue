@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        
+        /*con jugadores rollo cards
     </div>
 </template>
 <script>
