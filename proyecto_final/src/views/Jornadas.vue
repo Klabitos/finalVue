@@ -1,16 +1,15 @@
 <template lang="">
     <div>
-        <DesplegableJornadas></DesplegableJornadas>
-        <div class="d-flex justify-content-between">
-            <JornadaIndividual></JornadaIndividual>
-            <JornadaIndividual></JornadaIndividual>
-            <JornadaIndividual></JornadaIndividual>
+        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas()></DesplegableJornadas>
+        <div class="d-flex justify-content-between flex-wrap">
+            <JornadaIndividual  v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" resultado1="1" resultado2="0"></JornadaIndividual>
         </div>
 
     </div>
     
 </template>
 <script>
+import axios from "axios"
 import DesplegableJornadas from "../components/DesplegableJornadas.vue"
 import JornadaIndividual from "../components/JornadaIndividual.vue"
 export default {
@@ -21,7 +20,10 @@ export default {
     data(){
         return{
             arrayJornadas:[],
-            arrayRoundJornadas:[]
+            arrayJornadaEspecifica:[],
+            arrayRoundJornadas:[],
+            jornadaActual:0,
+            listaEquipos:[]
         }
     },
     methods: {
@@ -42,10 +44,40 @@ export default {
         },
         cargarJornada(numJornada){
             this.$router.push({name:"Jornadas", params: {numeroJornada: numJornada}});
-        }
+        },
+        obtenerArrayJornadaEspecifica(){
+            this.arrayJornadaEspecifica=[];
+            for(let i=0; i<this.arrayJornadas.length; i++){
+                if(this.arrayJornadas[i].round==`Jornada ${this.$route.params.numeroJornada}`){
+                    this.arrayJornadaEspecifica.push(this.arrayJornadas[i]);
+                }
+            }  
+        },
+        obtenerIdEquipo(nombreEquipo){
+            for(let i=0; this.listaEquipos.length;  i++){
+                if(this.listaEquipos[i].name==nombreEquipo){
+                    console.log(this.listaEquipos[i].id);
+                    return this.listaEquipos[i].id;
+                }
+            }
+            return 1;
+        },
+        async obtenerListaEquipos(){
+            await axios.get("http://localhost:3000/clubs")
+            .then(response => this.listaEquipos = response.data)
+            .catch(response => alert("Error al recuperar datos"+ response.status));
+        },
     },
     created() {
         this.obtenerTodasJornadas();
+        this.obtenerArrayJornadaEspecifica();
+        this.obtenerListaEquipos();
+    },
+    updated() {
+        if(this.jornadaActual!=this.$route.params.numeroJornada){
+            this.jornadaActual=this.$route.params.numeroJornada;
+            this.obtenerArrayJornadaEspecifica();
+        }
     },
 }
 </script>

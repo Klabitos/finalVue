@@ -21,38 +21,20 @@
 
 </template>
 <script>
-import axios from "axios";
 export default {
     name:"DesplegableJornadas",
-    data(){
-        return{
-            arrayJornadas:[],
-            arrayRoundJornadas:[]
-        }
-    },
+    props:[
+        "numeroJornadas"
+    ],
     methods: {
-        async obtenerTodasJornadas(){
-            await axios.get(`http://localhost:3000/matches`)
-            .then(response => this.arrayJornadas = response.data)
-            .catch(response => alert("Error al recuperar datos "+ response.status));
-        },
-        obtenerNumeroJornadas(){
-            for(let i=0; i<this.arrayJornadas.length; i++){
-                if(this.arrayRoundJornadas.includes(this.arrayJornadas[i].round)){
-                    continue;
-                }else{
-                    this.arrayRoundJornadas.push(this.arrayJornadas[i].round);
-                }
-            }  
-            return this.arrayRoundJornadas.length;
+        obtenerNumeroJornadas(){  
+            return this.numeroJornadas;
         },
         cargarJornada(numJornada){
             this.$router.push({name:"Jornadas", params: {numeroJornada: numJornada}});
         }
     },
-    created() {
-        this.obtenerTodasJornadas();
-    },
+
 };
 </script>
 <style>
