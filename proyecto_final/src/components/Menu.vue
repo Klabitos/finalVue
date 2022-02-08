@@ -14,7 +14,7 @@
                     </router-link>
                     
                
-                <router-link to="/jornadas/todos/0" class="nav-link_moded">
+                <router-link to="/jornada/1" class="nav-link_moded">
                     <i class="bi bi-calendar-week"></i>
                     Jornadas
                 </router-link>
