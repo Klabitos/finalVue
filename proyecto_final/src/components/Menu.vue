@@ -2,43 +2,47 @@
     <div class="mt-4">
             <h3>Menú principal</h3>
             <hr>
-            <nav class="nav d-flex flex-column ps-2 me-5 align-items-start">
-                <a href="" class="nav-link_moded">
-                    <i class="bi bi-house" @click="dirigirInicio()"></i>
-                    <router-link to="/inicio">
-                        Inicio
-                    </router-link>
-                    </a>
-                <a href="" class="nav-link_moded">
+            <nav class="nav ps-2 me-5">
+                <router-link to="/inicio" class="nav-link_moded">
+                    <i class="bi bi-house"></i>
+                    Inicio
+                </router-link>
+                    
+                <router-link to="/clasificacion/todos/0" class="nav-link_moded">
                     <i class="bi bi-sort-up"></i>
-                     <router-link to="/clasificacion/todos/0">
                     Clasificación
                     </router-link>
-                    </a>
-                <a href="" class="nav-link_moded">
+                    
+               
+                <router-link to="/jornadas/todos/0" class="nav-link_moded">
                     <i class="bi bi-calendar-week"></i>
                     Jornadas
-                 </a>
+                </router-link>
                     <ul>
                         <li class="">
-                            <i class="bi bi-caret-right-fill"></i>
-                            <a href=""> Nuevo Partido</a> </li>
+                                <router-link to="/nuevopartido/todos/0">
+                                <i class="bi bi-caret-right-fill"></i>
+                                Nuevo Partido
+                                </router-link> 
+                            </li>
                     </ul>
                
-                <a href="" class="nav-link_moded">
+                <router-link to="/jornadas/todos/0" class="nav-link_moded">
                     <i class="bi bi-building"></i>
-                    Equipos</a>
-                <a href="" class="nav-link_moded">
+                    Equipos</router-link>
+                <router-link to="/jornadas/todos/0" class="nav-link_moded">
                     <i class="bi bi-file-person"></i>
                     Jugadores
-                </a>
+                </router-link>
                     <ul class="d-flex flex-column align-items-start">
-                        <li class="">
-                            <i class="bi bi-caret-right-fill"></i>
-                            <a href=""> Nuevo Jugador</a> </li>
-                        <li class="">
-                            <i class="bi bi-caret-right-fill"></i>
-                            <a href=""> Eliminar Jugador </a> </li>
+                        <li class="segundoLi">                          
+                             <router-link to="/jornadas/todos/0">
+                             <i class="bi bi-caret-right-fill"></i> 
+                             Nuevo Jugador</router-link> </li>
+                        <li class="segundoLi">
+                             <router-link to="/jornadas/todos/0">
+                             <i class="bi bi-caret-right-fill"></i>
+                              Eliminar Jugador</router-link> </li>
                     </ul>
                 
             </nav>
@@ -49,25 +53,21 @@ export default {
     name:"Menu"
 }
 </script>
-<style>
-    .nav-link_moded {
-        display: block;
-        padding: .5rem 1rem;
-        color: white;
-        text-decoration: none;
-        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
-    }
-    ul li{
-        position: relative;
-        left: 50%;
-    }
+<style>    
     ul{
-        list-style-type: circle;
+        list-style-type: none;
     }
     i{
         border: 2px solid white;
-        padding: 5%;
+        padding: 1rem;
         border-radius: 25px;
+        margin-left: 0%;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+        
+    }
+    i:hover{
+        background-color: lightgray;
+        color: grey;
     }
 </style>
 
@@ -75,12 +75,27 @@ export default {
     a{
         color: white;
         width: 100%;
+        margin-top: 10%;
+    }
+    ul li{
+        position: relative;
+        left: 5%;
+        margin-top: 14%;
     }
     li a{
         color: grey;
         transition: color .15s ease-in-out;
     }
-    li a:hover{
-        color: lightblue;
+    .nav-link_moded{
+        margin-left: 0%;
+        display: block;
+        padding: .5rem;
+        color: white;
+        text-decoration: none;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+        text-align: left;
+    }
+    .segundoLi{
+        margin-top: 20%;
     }
 </style>
