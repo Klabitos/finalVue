@@ -4,20 +4,20 @@
             <hr>
             <nav class="nav d-flex flex-column ps-2 me-5 align-items-start">
                 <a href="" class="nav-link_moded">
-                    <i class="bi bi-house"></i>
+                    <i class="bi bi-house" @click="dirigirInicio()"></i>
                     <router-link to="/inicio">
-                        - Inicio
+                        Inicio
                     </router-link>
                     </a>
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-sort-up"></i>
-                     <router-link to="/clasificacion">
-                    - Clasificación
+                     <router-link to="/clasificacion/todos/0">
+                    Clasificación
                     </router-link>
                     </a>
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-calendar-week"></i>
-                    - Jornadas
+                    Jornadas
                  </a>
                     <ul>
                         <li class="">
@@ -27,10 +27,10 @@
                
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-building"></i>
-                    - Equipos</a>
+                    Equipos</a>
                 <a href="" class="nav-link_moded">
                     <i class="bi bi-file-person"></i>
-                    - Jugadores
+                    Jugadores
                 </a>
                     <ul class="d-flex flex-column align-items-start">
                         <li class="">
@@ -64,11 +64,17 @@ export default {
     ul{
         list-style-type: circle;
     }
+    i{
+        border: 2px solid white;
+        padding: 5%;
+        border-radius: 25px;
+    }
 </style>
 
 <style scoped>
     a{
         color: white;
+        width: 100%;
     }
     li a{
         color: grey;

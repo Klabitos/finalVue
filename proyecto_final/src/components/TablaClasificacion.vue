@@ -13,10 +13,10 @@
             <tbody>
                 <tr v-for="(equipo, index) in ordenarEquipos()" :key="index">
                     <th scope="row">{{index+1}}</th>
-                    <td>
-                        <img :src="require('../assets/escudos/'+equipo.id+'.png')" alt="Escudo" width="50" height="50" @click="mostrarJugadoresEquipo(equipo.name)">  
+                    <td class="cursor">
+                        <img :src="require('../assets/escudos/'+equipo.id+'.png')" alt="Escudo" width="50" height="50" @click="mostrarJugadoresEquipo(equipo.name, equipo.id)">  
                     </td>
-                    <td>{{equipo.name}}</td>
+                    <td class="cursor" @click="mostrarJugadoresEquipo(equipo.name)">{{equipo.name}}</td>
                     <td>{{equipo.country}}</td>
                     <td>{{equipo.points}}</td>
                 </tr>
@@ -46,8 +46,8 @@ export default {
             });
             return this.listaEquipos;
         },
-        mostrarJugadoresEquipo(nombreEquipo){
-            this.$router.push({name:"ClasificacionEquipo", params: {nombreEquipo: nombreEquipo}});
+        mostrarJugadoresEquipo(nombreEquipo, equipoId){
+            this.$router.push({name:"Clasificacion", params: {nombreEquipo: nombreEquipo, equipoId: equipoId}});
         }
     },
     created() {
@@ -55,6 +55,8 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style>
+    .cursor{
+      cursor: pointer;
+    }
 </style>

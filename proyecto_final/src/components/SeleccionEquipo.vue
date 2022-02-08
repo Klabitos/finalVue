@@ -1,5 +1,9 @@
 <template>
     <div class="coleccion mt-3">
+        <div class="d-flex flex-row justify-content-between">
+            <h1 class="display-5 text-white" v-text="this.$route.params.nombreEquipo"></h1>
+            <img :src="require('../assets/escudos/'+this.$route.params.equipoId+'.png')" alt="Escudo" width="50" height="50"> 
+        </div>
             <div class="card mt-1" v-for="(jugador, index) in devolverJugadores()" :key="index">
                 <div class="card-header">
                     <button class="btn btn-dark" @click="establecerParaVer(jugador.id)">
@@ -7,11 +11,10 @@
                     </button>
                 </div>
                 <div class="paraMostrar"  v-if="idParaVerCarta==jugador.id">
-                    <img src="../assets/jugadores/2.jpg" class="card-img-top" alt="...">
+                    <img :src="require('../assets/jugadores/'+jugador.id+'.jpg')" class="card-img-top" alt="Foto">
                 <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title"><u>  {{$route.params.nombreEquipo}}</u>&nbsp; #{{jugador.id}}</h5>
+                        <p class="card-text">Goles: {{jugador.scores}}</p>
                 </div>
                 </div>
                 
@@ -26,6 +29,7 @@ export default {
         return{
             arrayJugadores:[],
             idParaVerCarta:"",
+            nombreEquipo:"",
         }
     },
     methods: {
@@ -46,14 +50,16 @@ export default {
         this.obtenerJugadores();
     },
     updated() {
-        this.obtenerJugadores();
+        if(this.nombreEquipo!=this.$route.params.nombreEquipo){
+            this.nombreEquipo=this.$route.params.nombreEquipo;
+            this.obtenerJugadores();
+        }
+        
     },
 }
 </script>
 <style>
-    .coleccion{
 
-    }
 </style>
 <style scoped>
     .card:nth-of-type(even){
@@ -67,5 +73,15 @@ export default {
     }
     button{
         border: 1px solid white;
+    }
+    .coleccion{
+        border: 1px solid black;
+        padding: 5%;
+        border-radius: 10px;
+    }
+</style>
+<style scoped>
+    .card-body{
+        color: white;
     }
 </style>
