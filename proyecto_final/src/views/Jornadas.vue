@@ -2,7 +2,7 @@
     <div>
         <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada()></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
-            <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
+            <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
         </div>
     </div>
     
@@ -24,6 +24,7 @@ export default {
             arrayDateJornadas:[],
             jornadaActual:0,
             listaEquipos:[],
+            actualizar:false,
         }
     },
     methods: {
@@ -90,6 +91,14 @@ export default {
             .then(response => this.listaEquipos = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
         },
+        refresh(){
+            this.actualizar=true;
+            setTimeout(() => {
+                            this.obtenerTodasJornadas();
+            this.obtenerArrayJornadaEspecifica();    
+            }, 1000);
+
+        }
     },
     created(){
         this.obtenerTodasJornadas();
@@ -98,6 +107,13 @@ export default {
         this.obtenerFechasJornada();
     },
     updated() {
+        if(this.actualizar){
+            setTimeout(() => {
+                            this.obtenerTodasJornadas();
+            this.obtenerArrayJornadaEspecifica(); 
+            this.actualizar=false   
+            }, 1000);
+        }   
         if(this.jornadaActual!=this.$route.params.numeroJornada){
             this.jornadaActual=this.$route.params.numeroJornada;
             this.obtenerArrayJornadaEspecifica();

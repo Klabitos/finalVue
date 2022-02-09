@@ -21,7 +21,7 @@
                 <img :src="require('../assets/escudos/'+this.idEquipo2+'.png')" alt="Escudo" width="50" height="50"> 
             </div>
             <div v-if="resultado1==null">
-                <button type="button" :class="botonHabilitado" @click="guardarPartido"> Guardar </button>
+                <button type="button" :class="botonHabilitado" @click="guardarPartido">Guardar</button>
             </div>
         </div>
 </template>
@@ -37,19 +37,39 @@ export default {
             resultadoIntroducido1:"",
             resultadoIntroducido2:"",
             numJornadaActual:"",
+            llave:0,
+            equipo1:"",
+            equipo2:"",
+            textoBoton:"Guardar"
         }
     },
     methods: {
         guardarPartido(){
             axios.put(`http://localhost:3000/matches/${this.idPartido}`, {round:this.numJornadaActual, date: this.fechaJornada, team1:this.nombreEquipo1, team2:this.nombreEquipo2, score:[this.resultadoIntroducido1, this.resultadoIntroducido2]});
-            /*if(this.resultadoIntroducido1>this.resultadoIntroducido2){
+            this.$emit("refresh")
+            /* if(this.resultadoIntroducido1>this.resultadoIntroducido2){
                 //mas 3 al 1
+                 axios.get(`http://localhost:3000/clubs?name=${this.nombreEquipo1}`)
+                .then(response => this.equipo1 = response.data)
+                .catch(response => alert("Error al recuperar datos"+ response.status));
+                this.equipo1.points+=3;
             }else if(this.resultadoIntroducido1<this.resultadoIntroducido2){
-                //mas 3 al 2
+                axios.get(`http://localhost:3000/clubs?name=${this.nombreEquipo2}`)
+                .then(response => this.equipo2 = response.data)
+                .catch(response => alert("Error al recuperar datos"+ response.status));
+                this.equipo2.points+=3;
             }else{
-                //mas 1 a cada
+                axios.get(`http://localhost:3000/clubs?name=${this.nombreEquipo1}`)
+                .then(response => this.equipo1 = response.data)
+                .catch(response => alert("Error al recuperar datos"+ response.status));
+                this.equipo1.points+=1;
+                axios.get(`http://localhost:3000/clubs?name=${this.nombreEquipo2}`)
+                .then(response => this.equipo2 = response.data)
+                .catch(response => alert("Error al recuperar datos"+ response.status));
+                this.equipo2.points+=1;
             }
             */
+            
         }
     },
     computed:{
