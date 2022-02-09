@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-row mt-5 align-items-center justify-content-center">
     <h2 class="display-3 text-white">
-      <i>Temporada</i>
+      <span class="fst-italic">Temporada</span>
       <br />
       2021/22
     </h2>

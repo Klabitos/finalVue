@@ -20,27 +20,27 @@
                 </router-link>
                     <ul>
                         <li class="">
-                                <router-link to="/nuevopartido/todos/0">
+                                <router-link to="#">
                                 <i class="bi bi-caret-right-fill"></i>
                                 Nuevo Partido
                                 </router-link> 
                             </li>
                     </ul>
                
-                <router-link to="/jornadas/todos/0" class="nav-link_moded">
+                <router-link to="#" class="nav-link_moded">
                     <i class="bi bi-building"></i>
                     Equipos</router-link>
-                <router-link to="/jornadas/todos/0" class="nav-link_moded">
+                <router-link to="#" class="nav-link_moded">
                     <i class="bi bi-file-person"></i>
                     Jugadores
                 </router-link>
                     <ul class="d-flex flex-column align-items-start">
                         <li class="segundoLi">                          
-                             <router-link to="/jornadas/todos/0">
+                             <router-link to="#">
                              <i class="bi bi-caret-right-fill"></i> 
                              Nuevo Jugador</router-link> </li>
                         <li class="segundoLi">
-                             <router-link to="/jornadas/todos/0">
+                             <router-link to="#">
                              <i class="bi bi-caret-right-fill"></i>
                               Eliminar Jugador</router-link> </li>
                     </ul>

@@ -2,7 +2,7 @@
     <div>
         <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas()></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
-            <JornadaIndividual  v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
+            <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
         </div>
     </div>
     
@@ -22,7 +22,7 @@ export default {
             arrayJornadaEspecifica:[],
             arrayRoundJornadas:[],
             jornadaActual:0,
-            listaEquipos:[]
+            listaEquipos:[],
         }
     },
     methods: {
@@ -50,7 +50,8 @@ export default {
                 if(this.arrayJornadas[i].round==`Jornada ${this.$route.params.numeroJornada}`){
                     this.arrayJornadaEspecifica.push(this.arrayJornadas[i]);
                 }
-            }  
+            }
+            return this.arrayJornadaEspecifica;
         },
         obtenerIdEquipo(nombreEquipo){
             for(let i=0; this.listaEquipos.length;  i++){
