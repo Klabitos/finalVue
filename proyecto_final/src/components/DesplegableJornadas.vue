@@ -16,9 +16,8 @@
                 Fechas
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li class="dropdown-item" href="#" v-for="fecha, index in devolverFechasEstaJornada()" :key="index">
-                    {{fecha}}
-                    
+                <li class="dropdown-item" href="#" v-for="fecha, index in devolverFechasEstaJornada()" :key="index" @click="establecerFecha(fecha)">
+                    {{fecha}}              
                 </li>
             </ul> 
         </div>
@@ -40,10 +39,11 @@
 export default {
     name:"DesplegableJornadas",
     props:[
-        "numeroJornadas",
+        "numeroJornadas", "fechasJornada"
     ],
     data(){
         return{
+            arrayJornadas:[],
             arrayJornadaEspecifica:[],
             arrayFechasJornadaEspecifica:[
                 "1","2"
@@ -55,13 +55,16 @@ export default {
         obtenerNumeroJornadas(){  
             return this.numeroJornadas;
         },
+        establecerFecha(fecha){
+            this.fechaActual=fecha;
+        },
         devolverFechasEstaJornada(){
-            return this.arrayFechasJornadaEspecifica;
+            return this.fechasJornada;
         },
         cargarJornada(numJornada){
+            this.fechaActual=0;
             this.$router.push({name:"Jornadas", params: {numeroJornada: numJornada}});
         },
-
     },
 };
 </script>

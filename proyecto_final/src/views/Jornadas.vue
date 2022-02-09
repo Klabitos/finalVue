@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas()></DesplegableJornadas>
+        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada()></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
             <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
         </div>
@@ -21,6 +21,7 @@ export default {
             arrayJornadas:[],
             arrayJornadaEspecifica:[],
             arrayRoundJornadas:[],
+            arrayDateJornadas:[],
             jornadaActual:0,
             listaEquipos:[],
         }
@@ -40,6 +41,18 @@ export default {
                 }
             }  
             return this.arrayRoundJornadas.length;
+        },
+        obtenerFechasJornada(){
+            this.arrayDateJornadas=[];
+            for(let j=0; j<this.arrayJornadaEspecifica.length; j++){
+                if(this.arrayDateJornadas.includes(this.arrayJornadaEspecifica[j].date)){
+                }else{
+                    this.arrayDateJornadas.push(this.arrayJornadaEspecifica[j].date);
+                }
+            }  
+        },
+        devolverFechasJornada(){
+            return this.arrayDateJornadas;
         },
         cargarJornada(numJornada){
             this.$router.push({name:"Jornadas", params: {numeroJornada: numJornada}});
@@ -78,15 +91,17 @@ export default {
             .catch(response => alert("Error al recuperar datos"+ response.status));
         },
     },
-    created() {
+    created(){
         this.obtenerTodasJornadas();
         this.obtenerArrayJornadaEspecifica();
         this.obtenerListaEquipos();
+        this.obtenerFechasJornada();
     },
     updated() {
         if(this.jornadaActual!=this.$route.params.numeroJornada){
             this.jornadaActual=this.$route.params.numeroJornada;
             this.obtenerArrayJornadaEspecifica();
+            this.obtenerFechasJornada();
         }
     },
 }
