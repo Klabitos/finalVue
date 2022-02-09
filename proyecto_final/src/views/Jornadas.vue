@@ -68,12 +68,12 @@ export default {
             return this.arrayJornadaEspecifica;
         },
         obtenerIdEquipo(nombreEquipo){
-            for(let i=0; this.listaEquipos.length;  i++){
+            for(let i=0; i<this.listaEquipos.length;  i++){
                 if(this.listaEquipos[i].name==nombreEquipo){
                     return this.listaEquipos[i].id;
                 }
             }
-            return 1;
+            return 0;
         },
         obtenerResultadoPartido(nombreEquipo){
             for(let i=0; i<this.arrayJornadaEspecifica.length; i++){
@@ -94,8 +94,8 @@ export default {
         refresh(){
             this.actualizar=true;
             setTimeout(() => {
-                            this.obtenerTodasJornadas();
-            this.obtenerArrayJornadaEspecifica();    
+                this.obtenerTodasJornadas();
+                this.obtenerArrayJornadaEspecifica();    
             }, 1000);
 
         }
@@ -109,15 +109,17 @@ export default {
     updated() {
         if(this.actualizar){
             setTimeout(() => {
-                            this.obtenerTodasJornadas();
-            this.obtenerArrayJornadaEspecifica(); 
-            this.actualizar=false   
+                this.obtenerTodasJornadas();
+                this.obtenerArrayJornadaEspecifica(); 
+                this.obtenerListaEquipos();
+                this.actualizar=false   
             }, 1000);
         }   
         if(this.jornadaActual!=this.$route.params.numeroJornada){
             this.jornadaActual=this.$route.params.numeroJornada;
             this.obtenerArrayJornadaEspecifica();
             this.obtenerFechasJornada();
+            this.obtenerListaEquipos();
         }
     },
 }
