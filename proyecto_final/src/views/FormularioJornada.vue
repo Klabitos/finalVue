@@ -6,7 +6,7 @@
             <div class="input-group mb-3">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo 1</button>
                 <ul class="dropdown-menu">
-                    <li v-for="equipo, index in this.listaEquipos" :key="index" >
+                    <li v-for="equipo, index in this.obtenerListaEquipos" :key="index" >
                         <a class="dropdown-item" href="#" @click="establecerEquipo1(equipo)">{{equipo.name}}</a>
                     </li>
                 </ul>
@@ -16,7 +16,7 @@
                 <input type="text" class="form-control" v-model="equipo2.name">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo 2</button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li v-for="equipo, index in this.listaEquipos" :key="index">
+                    <li v-for="equipo, index in this.obtenerListaEquipos" :key="index">
                         <!-- imagen-->
                         <a class="dropdown-item" href="#" @click="establecerEquipo2(equipo)">{{equipo.name}}</a>
                     </li>
@@ -32,9 +32,10 @@
                 <input type="text" class="form-control" v-model="jornada">
             </div>
              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Fecha">
-                <input type="text" class="form-control bg-secondary text-white" v-model="fecha" onfocus="(this.type='date')">             
+                <input type="text" class="form-control" v-model="fechaReal">
+                <input type="text" class="form-control bg-secondary text-white" v-model="fecha" onfocus="(this.type='date')" @click="establecerFecha">             
             </div>
+            <button class="btn btn-secondary" @click="guardarJornada">Guardar Jornada</button>
             <!-- https://stackoverflow.com/questions/9624578/add-scrollbar-on-dropdown-menu-options/12459974  PARA EL SCROLL EN EL DROPDOWN-->
         </div>
         <img v-if="this.equipo2.name!=''" :src="require('../assets/escudos/'+this.idEquipo2+'.png')" alt="Escudo" width="75" height="250" class="col-2"> 
@@ -47,6 +48,8 @@ export default {
     name:"FormularioJornada",
     data(){
         return{
+            jornada:"",
+            fechaReal:"",
             fecha:"Fecha",
             listaEquipos:"",
             equipo1:{name:""},
@@ -54,16 +57,27 @@ export default {
         }
     },
     methods:{
+        guardarJornada(){
+            axios.post("http://localhost:3000/matches", {round:this.jornada, date:this.fechaReal, team1:this.equipo1.name, team2:this.equipo2.name})
+            .then(response => console.log(response.data.id));
+        },
         async obtenerTodosEquipos(){
             await axios.get("http://localhost:3000/clubs")
             .then(response => this.listaEquipos = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
         },
+      
         establecerEquipo1(equipo){
             this.equipo1=equipo;
         },
         establecerEquipo2(equipo){
             this.equipo2=equipo;
+        },
+        establecerJornada(numero){
+            this.jornada=`Jornada ${numero}`;
+        },
+        establecerFecha(){
+            this.fechaReal="Fecha";
         }
     },
     created(){
@@ -83,7 +97,18 @@ export default {
             }else{
                 return this.equipo2.id;
             }
-        }
+        },
+          obtenerListaEquipos(){
+            if(this.equipo1.name!="" && this.equipo2.name!=""){
+                return this.listaEquipos.filter(equipo => equipo.name!=this.equipo1.name &&  equipo.name!=this.equipo2.name)
+            }else if(this.equipo1.name!=""){
+                return this.listaEquipos.filter(equipo => equipo.name!=this.equipo1.name)
+            }else if(this.equipo2.name!=""){
+                return this.listaEquipos.filter(equipo => equipo.name!=this.equipo2.name)
+            }else{
+                return this.listaEquipos;
+            }
+        },
     }
 }
 </script>

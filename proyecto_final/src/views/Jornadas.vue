@@ -2,7 +2,7 @@
     <div>
         <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada() @refreshDate="refreshDate" @noDate="noDate"></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
-            <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
+            <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1, jornada.date)" :resultado2="obtenerResultadoPartido(jornada.team2, jornada.date)"></JornadaIndividual>
         </div>
     </div>
     
@@ -93,12 +93,11 @@ export default {
             }
             return 0;
         },
-        obtenerResultadoPartido(nombreEquipo){
+        obtenerResultadoPartido(nombreEquipo, fechaPartido){
             for(let i=0; i<this.arrayJornadaEspecifica.length; i++){
-                if(this.arrayJornadaEspecifica[i].team1==nombreEquipo && this.arrayJornadaEspecifica[i].hasOwnProperty('score')){
-                    return this.arrayJornadaEspecifica[i].score[0];
-                    
-                }else if(this.arrayJornadaEspecifica[i].team2==nombreEquipo && this.arrayJornadaEspecifica[i].hasOwnProperty('score')){
+                if(this.arrayJornadaEspecifica[i].team1==nombreEquipo && this.arrayJornadaEspecifica[i].hasOwnProperty('score') && this.arrayJornadaEspecifica[i].date==fechaPartido){
+                    return this.arrayJornadaEspecifica[i].score[0]; 
+                }else if(this.arrayJornadaEspecifica[i].team2==nombreEquipo && this.arrayJornadaEspecifica[i].hasOwnProperty('score') && this.arrayJornadaEspecifica[i].date==fechaPartido){
                     return this.arrayJornadaEspecifica[i].score[1];
                 }
             }
