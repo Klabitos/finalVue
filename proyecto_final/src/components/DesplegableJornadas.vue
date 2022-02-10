@@ -57,6 +57,7 @@ export default {
         },
         establecerFecha(fecha){
             this.fechaActual=fecha;
+            this.$emit("refreshDate", this.fechaActual);
         },
         devolverFechasEstaJornada(){
             return this.fechasJornada;

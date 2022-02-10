@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada()></DesplegableJornadas>
+        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada() @refreshDate="refreshDate"></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
             <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
         </div>
@@ -25,9 +25,14 @@ export default {
             jornadaActual:0,
             listaEquipos:[],
             actualizar:false,
+            arrayTratadoConFecha:false
         }
     },
     methods: {
+        refreshDate(fecha){
+            this.arrayJornadaEspecifica=this.obtenerArrayJornadaEspecificaFecha(fecha); 
+            console.log(this.arrayJornadaEspecifica);
+        },
         async obtenerTodasJornadas(){
             await axios.get(`http://localhost:3000/matches`)
             .then(response => this.arrayJornadas = response.data)
@@ -66,6 +71,14 @@ export default {
                 }
             }
             return this.arrayJornadaEspecifica;
+        },
+         obtenerArrayJornadaEspecificaFecha(fecha){  
+             if(this.arrayTratadoConFecha){
+                 this.obtenerArrayJornadaEspecifica();
+             } else{
+                 this.arrayTratadoConFecha=true;
+             } 
+            return this.arrayJornadaEspecifica.filter(partido => partido.date == fecha)
         },
         obtenerIdEquipo(nombreEquipo){
             for(let i=0; i<this.listaEquipos.length;  i++){
