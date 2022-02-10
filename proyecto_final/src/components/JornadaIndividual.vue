@@ -38,40 +38,41 @@ export default {
             resultadoIntroducido2:"",
             numJornadaActual:"",
             equipo1:"",
-            equipo2:0,
+            equipo2:"",
             textoBoton:"Guardar"
         }
     },
     methods: {
-        guardarPartido(){
+        async guardarPartido(){
             axios.put(`http://localhost:3000/matches/${this.idPartido}`, {round:this.numJornadaActual, date: this.fechaJornada, team1:this.nombreEquipo1, team2:this.nombreEquipo2, score:[this.resultadoIntroducido1, this.resultadoIntroducido2]});
             this.$emit("refresh");
-            this.obtenerObjetosEquipos();
+            await this.obtenerObjetosEquipos();
             console.log("equipo 1 -->"+this.idEquipo1);
             console.log(this.equipo1)
             console.log("equipo 2 -->"+this.idEquipo2);
             console.log(this.equipo2)
             //NO GUARDA LOS PUNTOS
-            /* if(this.resultadoIntroducido1>this.resultadoIntroducido2){
-                axios.put(`http://localhost:3000/clubs/${this.idEquipo1}`, {name:this.equipo1.name, id: this.equipo1.id, country:this.equipo1.country, points: this.equipo1.points})
+            if(this.resultadoIntroducido1>this.resultadoIntroducido2){
+                axios.put(`http://localhost:3000/clubs/${this.idEquipo1}`, {name:this.equipo1.name, id: this.equipo1.id, country:this.equipo1.country, points: Number(this.equipo1.points)+3})
             }else if(this.resultadoIntroducido1<this.resultadoIntroducido2){
-                axios.put(`http://localhost:3000/clubs/${this.idEquipo2}`, {name:this.equipo2.name, id: this.equipo2.id, country:this.equipo2.country, points: this.equipo2.points})
+                axios.put(`http://localhost:3000/clubs/${this.idEquipo2}`, {name:this.equipo2.name, id: this.equipo2.id, country:this.equipo2.country, points: this.equipo2.points+3})
             }else{            
-                axios.put(`http://localhost:3000/clubs/${this.idEquipo1}`, {name:this.equipo1.name, id: this.equipo1.id, country:this.equipo1.country, points: this.equipo1.points})
-                axios.put(`http://localhost:3000/clubs/${this.idEquipo2}`, {name:this.equipo2.name, id: this.equipo2.id, country:this.equipo2.country, points: this.equipo2.points})}
-             */       
+                axios.put(`http://localhost:3000/clubs/${this.idEquipo1}`, {name:this.equipo1.name, id: this.equipo1.id, country:this.equipo1.country, points: this.equipo1.points+1})
+                axios.put(`http://localhost:3000/clubs/${this.idEquipo2}`, {name:this.equipo2.name, id: this.equipo2.id, country:this.equipo2.country, points: this.equipo2.points+1})}       
             
         },
         async obtenerObjetosEquipos(){
             console.log("id 1 -->"+this.idEquipo1);
             console.log("id 2 -->"+this.idEquipo2);
             await axios.get(`http://localhost:3000/clubs/`,{params: {name:this.nombreEquipo1}}) //sale undefined
-                .then(response => this.equipo1 = response.data)
+                .then(response => this.equipo1 = response.data[0])
                 .catch(response => alert("Error al recuperar datos"+ response.status));
+
+
             await axios.get(`http://localhost:3000/clubs/`,{params: {name:this.nombreEquipo2}})
-                .then(response => this.equipo2 = response.data)
+                .then(response => this.equipo2 = response.data[0])
                 .catch(response => alert("Error al recuperar datos"+ response.status));
-       
+
        }
     },
     computed:{
