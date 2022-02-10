@@ -3,7 +3,7 @@ import Inicio from "../views/Inicio.vue"
 import Home from "../views/Home.vue"
 import Clasificacion from "../views/Clasificacion.vue"
 import Jornadas from "../views/Jornadas.vue"
-
+import FormularioJornada from "../views/FormularioJornada.vue"
 const routes = [
   {
     path: '/',
@@ -24,6 +24,11 @@ const routes = [
     path: '/jornada/:numeroJornada',
     name: 'Jornadas',
     component: Jornadas
+  },
+  {
+    path: '/formularioJornada',
+    name: 'formularioJornada',
+    component: FormularioJornada
   },
 
 ]

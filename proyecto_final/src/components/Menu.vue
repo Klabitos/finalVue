@@ -20,7 +20,7 @@
                 </router-link>
                     <ul>
                         <li class="">
-                                <router-link to="#">
+                                <router-link to="/formularioJornada">
                                 <i class="bi bi-caret-right-fill"></i>
                                 Nuevo Partido
                                 </router-link> 
