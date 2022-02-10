@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada() @refreshDate="refreshDate"></DesplegableJornadas>
+        <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada() @refreshDate="refreshDate" @noDate="noDate"></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
             <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1)" :resultado2="obtenerResultadoPartido(jornada.team2)"></JornadaIndividual>
         </div>
@@ -29,6 +29,11 @@ export default {
         }
     },
     methods: {
+        noDate(){
+            this.actualizar=false;
+            this.obtenerTodasJornadas();
+            this.obtenerArrayJornadaEspecifica();
+        },
         refreshDate(fecha){
             this.arrayJornadaEspecifica=this.obtenerArrayJornadaEspecificaFecha(fecha); 
             console.log(this.arrayJornadaEspecifica);
@@ -130,6 +135,7 @@ export default {
         }   
         if(this.jornadaActual!=this.$route.params.numeroJornada){
             this.jornadaActual=this.$route.params.numeroJornada;
+            this.obtenerTodasJornadas();
             this.obtenerArrayJornadaEspecifica();
             this.obtenerFechasJornada();
             this.obtenerListaEquipos();

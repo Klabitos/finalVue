@@ -64,6 +64,7 @@ export default {
         },
         cargarJornada(numJornada){
             this.fechaActual=0;
+            this.$emit("noDate");
             this.$router.push({name:"Jornadas", params: {numeroJornada: numJornada}});
         },
     },
