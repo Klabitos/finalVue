@@ -37,7 +37,7 @@
             </div>
              <div class="input-group mb-3">
                 <input type="text" class="form-control" v-model="fechaReal">
-                <input type="text" class="form-control bg-secondary text-white" v-model="fecha" onfocus="(this.type='date')" @click="establecerFecha">             
+                <input type="text" class="form-control bg-secondary text-white" v-model="fecha" onfocus="(this.type='date')" onblur="(this.type='text')" @click="establecerFecha">             
             </div>
             <button class="btn btn-secondary" @click="guardarJornada" v-if='this.jornada!="" && this.fechaReal!="" && this.equipo1.name!="" && this.equipo2.name!=""' data-bs-target="#modal" data-bs-toggle="modal">Guardar Jornada</button>
             <button class="btn btn-secondary" v-else data-bs-toggle="modal" data-bs-target="#modal">Guardar Jornada</button>
@@ -111,6 +111,7 @@ export default {
             this.fechaReal="";
             this.equipo1={name:""};
             this.equipo2={name:""};
+            this.fecha="Fecha";
         }
     },
     created(){
