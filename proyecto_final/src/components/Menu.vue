@@ -3,45 +3,53 @@
             <h3>Menú principal</h3>
             <hr>
             <nav class="nav ps-2 me-5">
-                <router-link to="/inicio" class="nav-link_moded">
-                    <i class="bi bi-house"></i>
+                <router-link to="/inicio" class="nav-link_moded ">
+                    <i class="bi bi-house" v-if="devolverName!='Inicio'"></i>
+                    <i class="bi bi-house actualmenteEnEstaPagina" v-else></i>
                     Inicio
                 </router-link>
                     
                 <router-link to="/clasificacion/todos/0" class="nav-link_moded">
-                    <i class="bi bi-sort-up"></i>
+                    <i class="bi bi-sort-up" v-if="devolverName!='Clasificacion'"></i>
+                    <i class="bi bi-sort-up actualmenteEnEstaPagina" v-else></i>
                     Clasificación
                     </router-link>
                     
                
                 <router-link to="/jornada/1" class="nav-link_moded">
-                    <i class="bi bi-calendar-week"></i>
+                    <i class="bi bi-calendar-week" v-if="devolverName!='Jornadas'"></i>
+                    <i class="bi bi-calendar-week actualmenteEnEstaPagina" v-else></i>
                     Jornadas
                 </router-link>
                     <ul>
                         <li class="">
                                 <router-link to="/formularioJornada">
-                                <i class="bi bi-caret-right-fill"></i>
+                                <i class="bi bi-caret-right-fill" v-if="devolverName!='formularioJornada'"></i>
+                                 <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i>
                                 Nuevo Partido
                                 </router-link> 
                             </li>
                     </ul>
                
                 <router-link to="#" class="nav-link_moded">
-                    <i class="bi bi-building"></i>
+                    <i class="bi bi-building" v-if="devolverName!='Equipos'"></i>
+                    <i class="bi bi-building actualmenteEnEstaPagina" v-else></i>
                     Equipos</router-link>
                 <router-link to="#" class="nav-link_moded">
-                    <i class="bi bi-file-person"></i>
+                    <i class="bi bi-file-person" v-if="devolverName!='Jugadores'"></i>
+                    <i class="bi bi-file-person actualmenteEnEstaPagina" v-else></i>
                     Jugadores
                 </router-link>
                     <ul class="d-flex flex-column align-items-start">
                         <li class="segundoLi">                          
                              <router-link to="#">
-                             <i class="bi bi-caret-right-fill"></i> 
+                             <i class="bi bi-caret-right-fill" v-if="devolverName!='NewPlayer'"></i> 
+                             <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i> 
                              Nuevo Jugador</router-link> </li>
                         <li class="segundoLi">
                              <router-link to="#">
-                             <i class="bi bi-caret-right-fill"></i>
+                             <i class="bi bi-caret-right-fill" v-if="devolverName!='EliminarJugador'"></i>
+                              <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i>
                               Eliminar Jugador</router-link> </li>
                     </ul>
                 
@@ -50,7 +58,12 @@
 </template>
 <script>
 export default {
-    name:"Menu"
+    name:"Menu",
+    computed:{
+        devolverName(){
+            return this.$route.name
+          }
+    }
 }
 </script>
 <style>    
@@ -66,6 +79,11 @@ export default {
         
     }
     i:hover{
+        background-color: lightgray;
+        color: grey;
+    }
+
+    .actualmenteEnEstaPagina{
         background-color: lightgray;
         color: grey;
     }
