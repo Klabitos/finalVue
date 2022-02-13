@@ -31,8 +31,8 @@
                             </li>
                     </ul>
                
-                <router-link to="/equipos/todos/0" class="nav-link_moded">
-                    <i class="bi bi-building" v-if="devolverName!='Equipos'"></i>
+                <router-link to="/equipos/" class="nav-link_moded">
+                    <i class="bi bi-building" v-if="devolverName!='equipos'"></i>
                     <i class="bi bi-building actualmenteEnEstaPagina" v-else></i>
                     Equipos</router-link>
                 <router-link to="#" class="nav-link_moded">

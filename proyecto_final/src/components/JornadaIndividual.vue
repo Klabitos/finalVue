@@ -47,11 +47,6 @@ export default {
             axios.put(`http://localhost:3000/matches/${this.idPartido}`, {round:this.numJornadaActual, date: this.fechaJornada, team1:this.nombreEquipo1, team2:this.nombreEquipo2, score:[this.resultadoIntroducido1, this.resultadoIntroducido2]});
             this.$emit("refresh");
             await this.obtenerObjetosEquipos();
-            console.log("equipo 1 -->"+this.idEquipo1);
-            console.log(this.equipo1)
-            console.log("equipo 2 -->"+this.idEquipo2);
-            console.log(this.equipo2)
-            //NO GUARDA LOS PUNTOS
             if(this.resultadoIntroducido1>this.resultadoIntroducido2){
                 axios.put(`http://localhost:3000/clubs/${this.idEquipo1}`, {name:this.equipo1.name, id: this.equipo1.id, country:this.equipo1.country, points: Number(this.equipo1.points)+3})
             }else if(this.resultadoIntroducido1<this.resultadoIntroducido2){
@@ -62,8 +57,6 @@ export default {
             
         },
         async obtenerObjetosEquipos(){
-            console.log("id 1 -->"+this.idEquipo1);
-            console.log("id 2 -->"+this.idEquipo2);
             await axios.get(`http://localhost:3000/clubs/`,{params: {name:this.nombreEquipo1}}) //sale undefined
                 .then(response => this.equipo1 = response.data[0])
                 .catch(response => alert("Error al recuperar datos"+ response.status));

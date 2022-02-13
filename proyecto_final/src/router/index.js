@@ -32,7 +32,7 @@ const routes = [
     component: FormularioJornada
   },
   {
-    path: '/equipos/:nombreEquipo/:equipoId',
+    path: '/equipos/',
     name: 'equipos',
     component: Equipos
   },

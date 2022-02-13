@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card mb-3 mt-3">
+        <div :class="obtenerColorFondo" >
             <div class="row g-0 d-flex justify-content-between">
                 <div class="col-md-4 foto d-flex align-items-center justify-content-between">
                     <img :src="require('../assets/escudos/'+this.equipo.id+'.png')" alt="Escudo" height="50" width="50" class="img rounded-start align-self-start mt-3 mb-3"> 
@@ -20,23 +20,30 @@
                                     </ul>
                             </div>  
                             <button class="btn btn-secondary mt-2">Nuevo Jugador</button>                          
-                        </p>                
-                    </div>
-                </div>
-            </div>
+                            
+                        </p>                                      
+                    </div>                   
+                </div>               
+            </div>          
         </div>
+        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name"></FormularioNuevoJugador>
     </div>
 </template>
 <script>
 import axios from "axios"
+import FormularioNuevoJugador from "../components/FormularioNuevoJugador.vue"
 export default {
     name:"EquipoIndividual",
+    components:{
+        FormularioNuevoJugador
+    },
     props:[
         "equipo", "index",
     ],
     data(){
         return{
             arrayJugadores:[],
+            mostrar:true,
         }
     },
     methods:{
@@ -44,12 +51,21 @@ export default {
             const jugadores = await axios.get(`http://localhost:3000/players?team=${nombreEquipo}`)
             .then(response => this.arrayJugadores = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
-            console.log(jugadores);
             return jugadores;
         },
+        
     },
     created(){
         this.obtenerJugadores(this.equipo.name);
+    },
+    computed:{
+        obtenerColorFondo(){
+            if(this.index%2==0){
+                return "card mb-3 mt-3 impar text-white"
+            }else{  
+                return "card mb-3 mt-3 par text-white"
+            }
+        }
     }
     
 }
@@ -62,12 +78,20 @@ export default {
         background-color: rgb(71, 71, 71);
     }
     .country{
-       color: rgb(71, 71, 71);
+       color: white;
     }
+
 </style>
 <style scoped>
+    .par{
+        background-color: #2c3034;
+    }
+    .impar{
+        background-color: #373b3e;
+    }
     
     .card{
+            border: 1px solid black;
             max-height: 79px;
             max-width: 100%;
             transition: 1.3s;
