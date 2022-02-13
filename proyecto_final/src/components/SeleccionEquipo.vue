@@ -11,7 +11,8 @@
                     </button>
                 </div>
                 <div class="paraMostrar"  v-if="idParaVerCarta==jugador.id">
-                    <img :src="require('../assets/jugadores/'+jugador.id+'.jpg')" class="card-img-top" alt="Foto">
+                    <img :src="require('../assets/jugadores/'+jugador.id+'.jpg')" class="card-img-top" alt="Foto" v-if="existeRutaImagen(jugador.id)">
+                    <img src='../assets/jugadores/default.png' class="card-img-top" alt="Foto" v-else>
                 <div class="card-body">
                         <h5 class="card-title"><u>  {{$route.params.nombreEquipo}}</u>&nbsp; #{{jugador.id}}</h5>
                         <p class="card-text">Goles: {{jugador.scores}}</p>
@@ -30,6 +31,7 @@ export default {
             arrayJugadores:[],
             idParaVerCarta:"",
             nombreEquipo:"",
+            idJugadoresSinFoto:[]
         }
     },
     methods: {
@@ -37,17 +39,47 @@ export default {
             await axios.get(`http://localhost:3000/players?team=${this.$route.params.nombreEquipo}`)
             .then(response => this.arrayJugadores = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
-            
+            await this.comprobarJugadores();   
         },
         devolverJugadores(){
             return this.arrayJugadores;
         },
         establecerParaVer(id){
             this.idParaVerCarta=id;
+        },
+        comprobarJugadores(){
+            let idRuta;
+            let error;
+            this.idJugadoresSinFoto=[]
+            for(let i=0; i< this.devolverJugadores().length; i++){
+                idRuta = this.devolverJugadores()[i].id;
+                try {
+                    require('../assets/jugadores/'+idRuta+'.jpg')
+                }
+                    catch (e) {
+                    error=true;
+                    }
+                if(error){
+                    this.idJugadoresSinFoto.push(idRuta);
+                }else{
+                }
+               
+            }
+        },
+        existeRutaImagen(id){
+            for(let j=0; j<this.idJugadoresSinFoto.length; j++){
+                if(this.idJugadoresSinFoto[j]==id){
+                    return false;
+                }
+            }
+            return true;
         }
+        
+    },
+    computed:{
     },
     created() {
-        this.obtenerJugadores();
+        this.obtenerJugadores();  
     },
     updated() {
         if(this.nombreEquipo!=this.$route.params.nombreEquipo){

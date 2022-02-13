@@ -16,7 +16,7 @@
                     <td class="cursor">
                         <img :src="require('../assets/escudos/'+equipo.id+'.png')" alt="Escudo" width="50" height="50" @click="mostrarJugadoresEquipo(equipo.name, equipo.id)">  
                     </td>
-                    <td class="cursor" @click="mostrarJugadoresEquipo(equipo.name)">{{equipo.name}}</td>
+                    <td class="cursor" @click="mostrarJugadoresEquipo(equipo.name, equipo.id)">{{equipo.name}}</td>
                     <td>{{equipo.country}}</td>
                     <td>{{equipo.points}}</td>
                 </tr>
