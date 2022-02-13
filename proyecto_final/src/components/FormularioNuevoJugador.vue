@@ -8,7 +8,7 @@
                         <a class="dropdown-item" href="#" @click="establecerEquipo(equipo.name)">{{equipo.name}}</a>
                     </li>
                 </ul>
-                <input type="text" class="form-control" v-model="nombreEquipoElegido">
+                <input type="text" class="form-control" v-model="this.nombreEquipoElegido" :readonly="this.readOnly">
         </div>
         <div class="input-group mb-3">
                 <input type="text" class="form-control" v-model="nombreJugador">
@@ -19,7 +19,7 @@
                     <button class="btn btn-secondary" type="button" >Número de Goles</button>
                     <input type="number" class="form-control goles" v-model="goles">
                 </div>
-                <button class="btn btn-secondary ms-4" @click="guardarJugador">Guardar Jugador</button>
+                <button class="btn btn-secondary ms-4" @click="guardarJugador">Guardar Jugador</button> <!-- TODO el dropdown y que se ponga el name solo -->
         </div>
     </div>
 </template>
@@ -30,10 +30,12 @@ export default {
     params:["nombreEquipo"],
     data(){
         return{
+            nombreDelEquipo:"assisi",
             listaEquipos:[],
             nombreEquipoElegido:"",
             goles:0,
-            nombreJugador:""
+            nombreJugador:"",
+            readOnly:true
         }
     },
     methods:{
@@ -47,15 +49,19 @@ export default {
             this.nombreEquipoElegido=equipo;
         },
         guardarJugador(){
-             axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipoElegido, scores:this.goles})
+            if(this.nombreJugador!="" && this.goles!=0 && this.nombreEquipoElegido != ""){
+            axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipoElegido, scores:this.goles})
             .then(response => console.log("Introducido Correctamente")); 
+            }
         }
     },
+    computed:{
+        
+    },
     created(){
-        console.log(this.nombreEquipo);
         this.obtenerTodosEquipos();
         if(this.nombreEquipo!=""){
-            this.establecerEquipo(this.nombreEquipo)
+            this.nombreEquipoElegido=this.nombreEquipo
         }else{
             
         }

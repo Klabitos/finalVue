@@ -2,31 +2,28 @@
     <div>
         <div :class="obtenerColorFondo" >
             <div class="row g-0 d-flex justify-content-between">
-                <div class="col-md-4 foto d-flex align-items-center justify-content-between">
+                <div class="col-md-4 foto d-flex justify-content-between">
                     <img :src="require('../assets/escudos/'+this.equipo.id+'.png')" alt="Escudo" height="50" width="50" class="img rounded-start align-self-start mt-3 mb-3"> 
-                    <h2 class="info"> {{this.index+1}}º -  &nbsp;&nbsp;&nbsp;       {{this.equipo.points}} puntos</h2>
+                    <h2 class="info mt-3"> {{this.index+1}}º -  &nbsp;&nbsp;&nbsp;       {{this.equipo.points}} puntos</h2>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title display-5">{{this.equipo.name}}</h5>
-                        <p class="card-text">
+                        <p class="card-text scroll text-white mt-2 mb-2">
                             <strong class="country mt-2 mb-2">{{this.equipo.country}}</strong>
-                            <div class="scroll text-white mt-2 mb-2">
-                                    <ul>
-                                        <li><strong>JUGADORES</strong></li>
-                                        <li v-for="jugador, index2 in this.arrayJugadores" :key="index2" class="text-white">
-                                            {{jugador.name}}
-                                        </li>
-                                    </ul>
-                            </div>  
-                            <button class="btn btn-secondary mt-2">Nuevo Jugador</button>                          
-                            
-                        </p>                                      
+                            <ul>
+                                <li><strong>JUGADORES</strong></li>
+                                <li v-for="jugador, index2 in this.arrayJugadores" :key="index2" class="text-white">
+                                    {{jugador.name}}
+                                </li>
+                            </ul>  
+                        </p> 
+                        <button class="btn btn-secondary mt-2 botonGuardar" @click="mostrarFormulario">Nuevo Jugador</button>                                        
                     </div>                   
                 </div>               
             </div>          
         </div>
-        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name"></FormularioNuevoJugador>
+        <FormularioNuevoJugador v-if="mostrar" nombreEquipo="aaa"></FormularioNuevoJugador>
     </div>
 </template>
 <script>
@@ -43,7 +40,7 @@ export default {
     data(){
         return{
             arrayJugadores:[],
-            mostrar:true,
+            mostrar:false,
         }
     },
     methods:{
@@ -53,6 +50,9 @@ export default {
             .catch(response => alert("Error al recuperar datos"+ response.status));
             return jugadores;
         },
+        mostrarFormulario(){
+            this.mostrar=true;
+        }
         
     },
     created(){
@@ -73,7 +73,7 @@ export default {
 <style>
     
     .scroll{    
-        height: 130px;
+        height: 150px;
         overflow-y: scroll;
         background-color: rgb(71, 71, 71);
     }
@@ -89,7 +89,13 @@ export default {
     .impar{
         background-color: #373b3e;
     }
-    
+    .botonGuardar{
+        display: none;
+        transition: 1.3s;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .card{
             border: 1px solid black;
             max-height: 79px;
@@ -119,6 +125,10 @@ export default {
     }
     .card:hover .info{
         display: none;
+        transition: 1.3s;
+    }
+    .card:hover .botonGuardar{
+        display: block;
         transition: 1.3s;
     }
     img{
