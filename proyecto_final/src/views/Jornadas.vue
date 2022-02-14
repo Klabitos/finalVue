@@ -51,7 +51,7 @@ export default {
                     this.arrayRoundJornadas.push(this.arrayJornadas[i].round);
                 }
             }  
-            return this.arrayRoundJornadas.length-1; //TODO REVISAR
+            return this.arrayRoundJornadas.length; //TODO REVISAR
         },
         obtenerFechasJornada(){
             this.arrayDateJornadas=[];
