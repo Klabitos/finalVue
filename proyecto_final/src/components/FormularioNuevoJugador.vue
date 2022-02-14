@@ -8,7 +8,7 @@
                         <a class="dropdown-item" href="#" @click="establecerEquipo(equipo.name)">{{equipo.name}}</a>
                     </li>
                 </ul>
-                <input type="text" class="form-control" :value="this.nombreEquipo" :readonly="this.readOnly">
+                <input type="text" class="form-control" :readonly="this.readOnly" v-model="this.nombreEquipo">
         </div>
         <div class="input-group mb-3">
                 <input type="text" class="form-control" v-model="nombreJugador">
@@ -33,7 +33,6 @@ export default {
     data(){
         return{
             listaEquipos:[],
-            nombreEquipoElegido:"",
             goles:0,
             nombreJugador:"",
             readOnly:true
@@ -47,12 +46,14 @@ export default {
         },
       
         establecerEquipo(equipo){
-            this.nombreEquipoElegido=equipo;
+            this.nombreEquipo=equipo;
         },
         guardarJugador(){
-            if(this.nombreJugador!="" && this.goles!=0 && this.nombreEquipoElegido !=""){
-            axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipoElegido, scores:this.goles})
+            if(this.nombreJugador!="" && this.nombreEquipo !=""){
+            axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipo, scores:this.goles})
             .then(response => console.log("Introducido Correctamente")); 
+            this.$emit("guardado", this.nombreEquipo);
+            
             }
         }
     },
@@ -62,10 +63,8 @@ export default {
     created(){
         this.obtenerTodosEquipos();
         if(this.nombreEquipo!=""){
-            console.log(this.nombreEquipo);
             this.nombreEquipoElegido=this.nombreEquipo
         }
-        console.log("fuera");
     }
 }
 </script>

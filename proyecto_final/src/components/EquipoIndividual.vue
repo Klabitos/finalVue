@@ -23,7 +23,7 @@
                 </div>               
             </div>          
         </div>
-        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name"></FormularioNuevoJugador>
+        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name" @guardado="guardado"></FormularioNuevoJugador>
     </div>
 </template>
 <script>
@@ -52,6 +52,13 @@ export default {
         },
         mostrarFormulario(){
             this.mostrar=true;
+        },
+        guardado(nombreEquipo){
+            setTimeout(() => {
+                this.obtenerJugadores(nombreEquipo);
+                this.mostrar=false;
+            }, 1000);
+            
         }
         
     },
