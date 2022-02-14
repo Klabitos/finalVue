@@ -23,7 +23,7 @@
                 </div>               
             </div>          
         </div>
-        <FormularioNuevoJugador v-if="mostrar" nombreEquipo="aaa"></FormularioNuevoJugador>
+        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name"></FormularioNuevoJugador>
     </div>
 </template>
 <script>
