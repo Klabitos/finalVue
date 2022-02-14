@@ -8,8 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="ventanaCerrada"></button>
             </div>
             <div class="modal-body">
-                {{objetoModal.mensaje}}
-                
+                {{objetoModal.mensaje}}              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="ventanaCerrada">Close</button>

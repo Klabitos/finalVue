@@ -59,7 +59,8 @@ export default {
                 this.mostrar=false;
             }, 1000);
             
-        }
+        },
+        
         
     },
     created(){

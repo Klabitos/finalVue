@@ -1,7 +1,6 @@
 <template >
 <div>
         <Modal :objetoModal="obtenerObjetoModal" @close="this.seteoInicio"></Modal>
-
         <!-- <h1 class="text-white" v-show="this.exito">Se ha registrado con éxito la jornada</h1> -->
        <div class="d-flex justify-content-around align-items-center">
         <img v-if="this.equipo1.name!=''" :src="require('../assets/escudos/'+this.idEquipo1+'.png')" alt="Escudo" width="75" height="250" class="col-2"> 
