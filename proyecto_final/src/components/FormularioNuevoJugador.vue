@@ -21,7 +21,7 @@
                     <input type="number" class="form-control goles" v-model="goles">
                 </div>
                 <button class="btn btn-secondary ms-4" @click="guardarJugador" data-bs-target="#modalEquipo" data-bs-toggle="modal" v-if="this.nombreJugador!='' && this.nombreEquipo !=''">Guardar Jugador</button>
-                <button class="btn btn-secondary" v-else data-bs-toggle="modal" data-bs-target="#modalEquipo">Guardar Jornada</button>
+                <button class="btn btn-secondary ms-4" v-else data-bs-toggle="modal" data-bs-target="#modalEquipo">Guardar Jornada</button>
         </div>
     </div>
 </template>
