@@ -44,6 +44,7 @@ export default {
     },
     methods: {
         async guardarPartido(){
+            if(Number.isInteger(this.resultadoIntroducido1) && Number.isInteger(this.resultadoIntroducido2)){
             axios.put(`http://localhost:3000/matches/${this.idPartido}`, {round:this.numJornadaActual, date: this.fechaJornada, team1:this.nombreEquipo1, team2:this.nombreEquipo2, score:[this.resultadoIntroducido1, this.resultadoIntroducido2]});
             this.$emit("refresh");
             await this.obtenerObjetosEquipos();
@@ -54,7 +55,7 @@ export default {
             }else{            
                 axios.put(`http://localhost:3000/clubs/${this.idEquipo1}`, {name:this.equipo1.name, id: this.equipo1.id, country:this.equipo1.country, points: this.equipo1.points+1})
                 axios.put(`http://localhost:3000/clubs/${this.idEquipo2}`, {name:this.equipo2.name, id: this.equipo2.id, country:this.equipo2.country, points: this.equipo2.points+1})}       
-            
+            }
         },
         async obtenerObjetosEquipos(){
             await axios.get(`http://localhost:3000/clubs/`,{params: {name:this.nombreEquipo1}}) //sale undefined
