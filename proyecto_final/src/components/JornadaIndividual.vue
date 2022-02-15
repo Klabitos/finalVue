@@ -72,9 +72,9 @@ export default {
     computed:{
         botonHabilitado(){
             if(Number.isInteger(this.resultadoIntroducido1) && Number.isInteger(this.resultadoIntroducido2)){
-                return "btn btn-secondary";
+                return "btn btn-success";
             }else{
-                return "btn btn-outline-secondary"
+                return "btn btn-outline-success"
             }
         }
     },

@@ -13,10 +13,10 @@
                         <a class="dropdown-item" href="#" @click="establecerEquipo1(equipo)">{{equipo.name}}</a>
                     </li>
                 </ul>
-                <input type="text" class="form-control" v-model="equipo1.name">
+                <input type="text" class="form-control" v-model="equipo1.name" readonly>
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" v-model="equipo2.name">
+                <input type="text" class="form-control" v-model="equipo2.name" readonly>
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo 2</button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li v-for="equipo, index in this.obtenerListaEquipos" :key="index">
@@ -32,14 +32,14 @@
                         <a class="dropdown-item" href="#" @click="establecerJornada(index+1)">Jornada {{index+1}}</a>
                     </li>
                 </ul>
-                <input type="text" class="form-control" v-model="jornada">
+                <input type="text" class="form-control" v-model="jornada" readonly>
             </div>
              <div class="input-group mb-3">
-                <input type="text" class="form-control" v-model="fechaReal">
+                <input type="text" class="form-control" v-model="fechaReal" readonly>
                 <input type="text" class="form-control bg-secondary text-white" v-model="fecha" onfocus="(this.type='date')" onblur="(this.type='text')" @click="establecerFecha">             
             </div>
-            <button class="btn btn-secondary" @click="guardarJornada" v-if='this.jornada!="" && this.fechaReal!="" && this.equipo1.name!="" && this.equipo2.name!=""' data-bs-target="#modal" data-bs-toggle="modal">Guardar Jornada</button>
-            <button class="btn btn-secondary" v-else data-bs-toggle="modal" data-bs-target="#modal">Guardar Jornada</button>
+            <button class="btn btn-success" @click="guardarJornada" v-if='this.jornada!="" && this.fechaReal!="" && this.equipo1.name!="" && this.equipo2.name!=""' data-bs-target="#modal" data-bs-toggle="modal">Guardar Jornada</button>
+            <button class="btn btn-success" v-else data-bs-toggle="modal" data-bs-target="#modal">Guardar Jornada</button>
             
             <!-- https://stackoverflow.com/questions/9624578/add-scrollbar-on-dropdown-menu-options/12459974  PARA EL SCROLL EN EL DROPDOWN-->
         </div>
@@ -106,11 +106,14 @@ export default {
             this.fechaReal="Fecha";
         },
         seteoInicio(){
-            this.jornada="";
+            setTimeout(()=>{
+                            this.jornada="";
             this.fechaReal="";
             this.equipo1={name:""};
             this.equipo2={name:""};
             this.fecha="Fecha";
+            },100);
+
         }
     },
     created(){

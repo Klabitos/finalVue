@@ -2,15 +2,17 @@
     <div class="col-6 offset-3 text-white">
         <Modal :objetoModal="obtenerObjetoModal" @close="this.seteoInicio"></Modal>
         <h2 class="display-2 text-white mb-3">Nuevo Jugador</h2>
-        <div class="input-group mb-3">
+        <img :src="require('../assets/escudos/'+this.idEquipo+'.png')" alt="Escudo" width="200" height="200" class="ms-3 imagenEquipo mt-3" v-if="this.nombreEquipoElegido!=''">
+        <img :src="require('../assets/LaLiga.png')" alt="Escudo" width="200" height="200" class="ms-3 imagenEquipo mt-3" v-else>
+        <div class="input-group mb-3 mt-3">
                 <button class="btn btn-secondary dropdown-toggle botonEquipos" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo</button>
                 <ul class="dropdown-menu">
                     <li v-for="equipo, index in this.devolverListaDeEquiposVaciaOFull" :key="index" class="d-flex flex-row flex-nowrap justify-content-center" >
                         <img :src="require('../assets/escudos/'+index+'.png')" alt="Escudo" width="20" height="20" class="ms-3"> 
-                        <a class="dropdown-item" href="#" @click="establecerEquipo(equipo.name)">{{equipo.name}}</a>
+                        <a class="dropdown-item" href="#" @click="establecerEquipo(equipo.name, index)">{{equipo.name}}</a>
                     </li>
                 </ul>
-                <input type="text" class="form-control" v-model="nombreEquipoElegido" readonly v-if="this.nombreEquipoElegido!=''">
+                <input type="text" class="form-control mt-2" v-model="nombreEquipoElegido" readonly v-if="this.nombreEquipoElegido!=''">
         </div>
         
         <div class="input-group mb-3">
@@ -22,8 +24,8 @@
                     <button class="btn btn-secondary" type="button" >Número de Goles</button>
                     <input type="number" class="form-control goles" v-model="goles" min="0">
                 </div>
-                <button class="btn btn-secondary ms-4" @click="guardarJugador" data-bs-target="#modalEquipo" data-bs-toggle="modal" v-if="this.nombreJugador!='' && this.nombreEquipoElegido !=''">Guardar Jugador</button>
-                <button class="btn btn-secondary ms-4 mb-2" v-else data-bs-toggle="modal" data-bs-target="#modalEquipo">Guardar Jornadaa</button>
+                <button class="btn btn-success ms-4" @click="guardarJugador" data-bs-target="#modalEquipo" data-bs-toggle="modal" v-if="this.nombreJugador!='' && this.nombreEquipoElegido !=''">Guardar Jugador</button>
+                <button class="btn btn-success ms-4 mb-2" v-else data-bs-toggle="modal" data-bs-target="#modalEquipo">Guardar Jornada</button>
         </div>
     </div>
 </template>
@@ -43,6 +45,7 @@ export default {
             nombreEquipoElegido:"",
             listaEquipos:[],
             goles:0,
+            idEquipo:0,
             nombreJugador:"",
             readOnly:false,
             modalError:{
@@ -74,8 +77,9 @@ export default {
             }, 100);
             
         },
-        establecerEquipo(equipo){
+        establecerEquipo(equipo, idEquipo){
             this.nombreEquipoElegido=equipo;
+            this.idEquipo=idEquipo;
         },
         guardarJugador(){
             axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipoElegido, scores:this.goles})
