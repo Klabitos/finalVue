@@ -47,6 +47,7 @@ export default {
             goles:0,
             idEquipo:0,
             nombreJugador:"",
+            readOnly:false, //Para saber si viene desde un punto con equipo predefinido o no
             modalError:{
                 id:"modalEquipo",
                 titulo:"Error en la información del jugador",
@@ -56,7 +57,7 @@ export default {
             modalGreen:{
                 id:"modalEquipo",
                 titulo:"Jugador Introducido Correctamente",
-                mensaje:"Gracias por paciencia.",
+                mensaje:"Gracias por la paciencia.",
                 error:false
             },
         }
@@ -107,6 +108,9 @@ export default {
         if(this.nombreEquipo!=""){
             this.nombreEquipoElegido=this.nombreEquipo
             this.idEquipo=this.idBase
+            this.readOnly=true;
+        }else{
+            this.readOnly=false;
         }
     },        
 }
