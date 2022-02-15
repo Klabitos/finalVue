@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         <h1 class="text-white mt-2">Equipos de la Liga</h1>
-        <EquipoIndividual v-for="(equipo, index) in this.ordenarPorPuntos()" :key="index" :equipo="equipo" :index="index"></EquipoIndividual>             
+        <EquipoIndividual v-for="(equipo, index) in this.ordenarPorPuntos()" :key="index" :equipo="equipo" :index="index" @equipoMostrado="equipoMostrado" :idQueHayQueMostrar="quitarFocusDeTodosEquiposMenosEste"></EquipoIndividual>             
     </div>
 </template>
 <script>
@@ -15,6 +15,7 @@ export default {
     data(){
         return{
             listaEquipos:[],
+            variableControlMostrarEquipos:-1 //PARA QUE SOLO SE MUESTRE UN EQUIPO A LA VEZ
         }
     },
     methods:{
@@ -28,10 +29,18 @@ export default {
                 return b.points-a.points;
             });
             return this.listaEquipos;
+        },
+        equipoMostrado(idEquipo){ //RECIBIMOS EL ID DEL EQUIPO QUE SE TIENE QUE VER
+            this.variableControlMostrarEquipos=idEquipo;
         }
     },
     created(){
         this.obtenerListaEquipos();
+    },
+    computed:{
+        quitarFocusDeTodosEquiposMenosEste(){
+            return this.variableControlMostrarEquipos; //LA MANDAMOS A TODOS LOS EQUIPOS, QUE EN UPDATED() COMPROBARAN SI SE TIENEN QUE CERRAR O NO
+        }
     }
 }
 </script>

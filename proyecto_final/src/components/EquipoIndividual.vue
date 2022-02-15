@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div :class="obtenerColorFondo" >
+        <div :class="obtenerClasesCard" @click="verEquipo">
             <div class="row g-0 d-flex justify-content-between">
-                <div class="col-md-4 foto d-flex justify-content-between">
-                    <img :src="require('../assets/escudos/'+this.equipo.id+'.png')" alt="Escudo" height="50" width="50" class="img rounded-start align-self-start mt-3 mb-3"> 
-                    <h2 class="info mt-3"> {{this.index+1}}º -  &nbsp;&nbsp;&nbsp;       {{this.equipo.points}} puntos</h2>
+                <div class="col-md-4 d-flex justify-content-between">
+                    <img :src="require('../assets/escudos/'+this.equipo.id+'.png')" alt="Escudo" height="50" width="50" :class="obtenerClasesImg"> 
+                    <h2 :class="obtenerClasesInfo"> {{this.index+1}}º -  &nbsp;&nbsp;&nbsp;       {{this.equipo.points}} puntos</h2>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title display-5">{{this.equipo.name}}</h5>
-                        <p class="card-text scroll text-white mt-2 mb-2">
+                        <p :class="obtenerClasesCardText">
                             <strong class="country mt-2 mb-2">{{this.equipo.country}}</strong>
                             <ul>
                                 <li><strong>JUGADORES</strong></li>
@@ -18,12 +18,12 @@
                                 </li>
                             </ul>  
                         </p> 
-                        <button class="btn btn-secondary mt-2 botonGuardar" @click="mostrarFormulario">Nuevo Jugador</button>                                        
+                        <button :class="obtenerClasesBoton" @click="mostrarFormulario">Nuevo Jugador</button>                                        
                     </div>                   
                 </div>               
             </div>          
         </div>
-        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name" @guardado="guardado"></FormularioNuevoJugador>
+        <FormularioNuevoJugador v-if="mostrar" :nombreEquipo="this.equipo.name" @guardado="guardado" :idBase="this.equipo.id"></FormularioNuevoJugador>
     </div>
 </template>
 <script>
@@ -35,12 +35,14 @@ export default {
         FormularioNuevoJugador
     },
     props:[
-        "equipo", "index",
+        "equipo", "index", "idQueHayQueMostrar"
     ],
+    emits:["equipoMostrado"],
     data(){
         return{
             arrayJugadores:[],
             mostrar:false,
+            mostrarEquipo:false,
         }
     },
     methods:{
@@ -57,22 +59,68 @@ export default {
             setTimeout(() => {
                 this.obtenerJugadores(nombreEquipo);
                 this.mostrar=false;
-            }, 1000);
+            }, 100);
             
         },
-        
-        
+        verEquipo(){
+            if(this.mostrarEquipo){
+                this.mostrarEquipo=false;
+            }else{
+                this.$emit("equipoMostrado", this.index);                
+                this.mostrarEquipo=true;                               
+            }               
+        }
+          
     },
     created(){
         this.obtenerJugadores(this.equipo.name);
     },
     computed:{
-        obtenerColorFondo(){
-            if(this.index%2==0){
-                return "card mb-3 mt-3 impar text-white"
-            }else{  
-                return "card mb-3 mt-3 par text-white"
+        obtenerClasesImg(){
+            if(this.mostrarEquipo){
+                return "img rounded-start align-self-start mt-3 mb-3 cardHovereadaAfectaImg"
+            }else{
+                return "img rounded-start align-self-start mt-3 mb-3";
             }
+        },
+        obtenerClasesCardText(){
+            if(this.mostrarEquipo){
+                return "card-text scroll text-white mt-2 mb-2 cardHovereadaAfectaCardText"
+            }else{
+                return "card-text scroll text-white mt-2 mb-2";
+            }
+        },
+        obtenerClasesInfo(){
+            if(this.mostrarEquipo){
+                return "info mt-3 cardHovereadaAfectaAinfo"
+            }else{
+                return "info mt-3";
+            }
+        },
+        obtenerClasesBoton(){
+            if(this.mostrarEquipo){
+                return "btn btn-secondary mt-2 botonGuardar cardHovereadaAfectaBotonGuardar"
+            }else{
+                return "btn btn-secondary mt-2 botonGuardar";
+            }
+        },
+        obtenerClasesCard(){
+            if(this.mostrarEquipo && this.index%2==0){
+                return "card mb-3 mt-3 impar text-white cardHovereada "
+            }else if(this.mostrarEquipo && this.index%2!=0){
+                return "card mb-3 mt-3 par text-white cardHovereada";
+            }else if(!this.mostrarEquipo && this.index%2==0){
+                return "card mb-3 mt-3 impar text-white";
+            }else{
+                 return "card mb-3 mt-3 par text-white";
+            }
+        },
+    },
+    updated(){
+        if(this.idQueHayQueMostrar==this.index){
+                this.mostrarEquipo=true; 
+        }else{
+            this.mostrarEquipo=false;
         }
     }
     
@@ -109,36 +157,37 @@ export default {
             max-height: 79px;
             max-width: 100%;
             transition: 1.3s;
+            cursor: pointer;
         }
-    .card:hover{
+        .cardHovereada{
             max-height: 360px;
             transition: 1.3s;
-    }
-    .card:hover img{
+        }
+        .cardHovereadaAfectaImg{
             height: 300px;
             width: 250px;
             border: 1px solid black;
-        background-color: #212529;
-        padding: 30px;
-        border-radius: 100%;
-        transition: 1.3s;
-    }
+            background-color: #212529;
+            padding: 30px;
+            border-radius: 100%;
+            transition: 1.3s;
+        }
     .card-text{
         display: none;
         transition: 1.3s;
     }
-    .card:hover .card-text{
-        display: block;
-        transition: 1.3s;
-    }
-    .card:hover .info{
-        display: none;
-        transition: 1.3s;
-    }
-    .card:hover .botonGuardar{
-        display: block;
-        transition: 1.3s;
-    }
+        .cardHovereadaAfectaCardText{
+            display: block;
+            transition: 1.3s;
+        }
+        .cardHovereadaAfectaAinfo{
+            display: none;
+            transition: 1.3s;
+        }
+        .cardHovereadaAfectaBotonGuardar{
+            display: block;
+            transition: 1.3s;
+        }
     img{
         border: 1px solid black;
         background-color: #212529;

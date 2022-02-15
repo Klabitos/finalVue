@@ -35,7 +35,7 @@ import axios from "axios";
 export default {
     name:"FormularioNuevoJugador",
     props:[
-        "nombreEquipo"
+        "nombreEquipo", "idBase"
     ],
     components:{
         Modal
@@ -47,7 +47,6 @@ export default {
             goles:0,
             idEquipo:0,
             nombreJugador:"",
-            readOnly:false,
             modalError:{
                 id:"modalEquipo",
                 titulo:"Error en la información del jugador",
@@ -107,9 +106,7 @@ export default {
         this.obtenerTodosEquipos();
         if(this.nombreEquipo!=""){
             this.nombreEquipoElegido=this.nombreEquipo
-            this.readOnly=true;
-        }else{
-            this.readOnly=false;
+            this.idEquipo=this.idBase
         }
     },        
 }

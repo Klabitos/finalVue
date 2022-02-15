@@ -60,7 +60,6 @@ export default {
   color: #2c3e50;
   background-color: #212529;
   min-height: 100vh;
-  overflow-y:scroll ;
 }
 a {
   text-decoration: none !important;
