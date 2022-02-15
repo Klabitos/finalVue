@@ -113,7 +113,7 @@ export default {
             setTimeout(() => {
                 this.obtenerTodasJornadas();
                 this.obtenerArrayJornadaEspecifica();    
-            }, 1000);
+            }, 100);
 
         }
     },
@@ -124,15 +124,15 @@ export default {
         this.obtenerFechasJornada();
     },
     updated() {
-        if(this.actualizar){
+        if(this.actualizar){ // Nos aseguramos de que se actualice el resultado
             setTimeout(() => {
                 this.obtenerTodasJornadas();
                 this.obtenerArrayJornadaEspecifica(); 
                 this.obtenerListaEquipos();
                 this.actualizar=false   
-            }, 1000);
+            }, 100);
         }   
-        if(this.jornadaActual!=this.$route.params.numeroJornada){
+        if(this.jornadaActual!=this.$route.params.numeroJornada){ //Refrescamos la información solo en caso de se cambie de jornada
             this.jornadaActual=this.$route.params.numeroJornada;
             this.obtenerTodasJornadas();
             this.obtenerArrayJornadaEspecifica();

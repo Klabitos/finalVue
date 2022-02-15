@@ -28,7 +28,7 @@
                     
                     <ul class="dropdown-menu">
                         <li v-for="jugador, index in this.calcularJugadores" :key="index" class="d-flex flex-row flex-nowrap justify-content-center" >
-                            <a class="dropdown-item" href="#" @click="establecerJugador(jugador.name)">{{jugador.name}}</a>
+                            <a class="dropdown-item" href="#" @click="establecerJugador(jugador.id, jugador.name)">{{jugador.name}}</a>
                         </li>
                     </ul>
 
@@ -37,7 +37,7 @@
         </div>
         <div class="d-flex flex-column justify-content-center">
             <span v-if="this.nombreJugador!=''">Jugador: {{this.nombreJugador}}</span>
-            <button class="btn btn-danger mt-3">Eliminar Jugador</button>
+            <button class="btn btn-danger mt-3" @click="borrarJugador()">Eliminar Jugador</button>
         </div>
     </div>
 </template>
@@ -52,6 +52,7 @@ export default {
             nombreEquipo:"",
             idEquipo:0,
             nombreJugador:"",
+            idJugador:"",
         }
     },
     methods: {
@@ -60,7 +61,8 @@ export default {
             this.idEquipo=idEquipo;
             this.nombreJugador="";
         },
-        establecerJugador(nombre){
+        establecerJugador(id, nombre){
+            this.idJugador=id;
             this.nombreJugador=nombre;
         },
         async obtenerJugadores(){
@@ -72,6 +74,16 @@ export default {
             await axios.get("http://localhost:3000/clubs")
             .then(response => this.listaEquipos = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
+        },
+        borrarJugador(){
+            axios.delete(`http://localhost:3000/players/${this.idJugador}`)
+            .then(response => console.log("Borrado correctamente"));
+            setTimeout(()=>{ //Para que de tiempo a actualizarse
+                this.obtenerJugadores();
+            }, 10);
+            this.nombreJugador="";
+            
+            
         },
         
     },

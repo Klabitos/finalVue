@@ -7,7 +7,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">  <span :class="isError">{{objetoModal.titulo}}</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="ventanaCerrada"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-dark">
                 {{objetoModal.mensaje}}              
             </div>
             <div class="modal-footer">

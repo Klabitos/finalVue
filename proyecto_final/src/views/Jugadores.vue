@@ -22,19 +22,17 @@ export default {
     methods: {
       comprobarSiClasificacionEnPantallaGrande(){
           if(this.$route.params.nombreEquipo!="todos"){
-          this.mostrarJugadores=true;
-      }else{
-          this.mostrarJugadores=false;
-      }
-      }
+                this.mostrarJugadores=true;
+            }else{
+                this.mostrarJugadores=false;
+            }
+      },
   },
   created() {
       this.comprobarSiClasificacionEnPantallaGrande();
-      console.log("Mostrar jugadores "+this.mostrarJugadores);
   },
   updated() {
       this.comprobarSiClasificacionEnPantallaGrande();
-      console.log("Mostrar jugadores "+this.mostrarJugadores);
   },
 }
 </script>

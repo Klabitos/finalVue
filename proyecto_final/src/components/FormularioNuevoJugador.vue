@@ -22,8 +22,8 @@
                     <button class="btn btn-secondary" type="button" >Número de Goles</button>
                     <input type="number" class="form-control goles" v-model="goles" min="0">
                 </div>
-                <button class="btn btn-secondary ms-4" @click="guardarJugador" data-bs-target="#modalEquipo" data-bs-toggle="modal" v-if="this.nombreJugador!='' && this.nombreEquipo !=''">Guardar Jugador</button>
-                <button class="btn btn-secondary ms-4 mb-2" v-else data-bs-toggle="modal" data-bs-target="#modalEquipo">Guardar Jornada</button>
+                <button class="btn btn-secondary ms-4" @click="guardarJugador" data-bs-target="#modalEquipo" data-bs-toggle="modal" v-if="this.nombreJugador!='' && this.nombreEquipoElegido !=''">Guardar Jugador</button>
+                <button class="btn btn-secondary ms-4 mb-2" v-else data-bs-toggle="modal" data-bs-target="#modalEquipo">Guardar Jornadaa</button>
         </div>
     </div>
 </template>
@@ -66,15 +66,21 @@ export default {
             .catch(response => alert("Error al recuperar datos"+ response.status));
         },
         seteoInicio(){
-            this.$emit("guardado", this.nombreEquipo);
+            this.$emit("guardado", this.nombreEquipoElegido);
+            setTimeout(() => {
+                this.nombreJugador="";
+                this.nombreEquipoElegido="";
+                this.goles=0;
+            }, 100);
+            
         },
         establecerEquipo(equipo){
             this.nombreEquipoElegido=equipo;
         },
         guardarJugador(){
-            axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipo, scores:this.goles})
+            axios.post("http://localhost:3000/players", {name:this.nombreJugador, team:this.nombreEquipoElegido, scores:this.goles})
             .then(response => console.log("Introducido Correctamente")); 
-                                   
+            
         }
     },
     computed:{

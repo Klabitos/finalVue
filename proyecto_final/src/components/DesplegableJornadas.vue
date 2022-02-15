@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div>
         <div class="d-flex flex-row justify-content-around">
             <div class="dropdown mt-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

@@ -20,10 +20,10 @@
                         <p class="card-text">Goles: {{jugador.scores}}</p>
                         <div v-if="golesIsModificable" class="golModificable">
                             Añadir goles: 
-                            <input type="number" name="" id="" min="0" value="0">
-                            <button class="btn btn-secondary ms-2">Añadir</button>
+                            <input type="number" name="" id="" min="0" v-model="this.golesExtra">
+                            <button class="btn btn-secondary ms-2" @click="addGoles(jugador.id, jugador.name, jugador.team, jugador.scores)">Añadir</button>
                             <br>
-                            <button class="btn btn-danger mt-3">Eliminar Jugador</button>
+                            <button class="btn btn-danger mt-3" @click="borrarJugador(jugador.id, jugador.team)">Eliminar Jugador</button>
                         </div>
                     </div>                      
                 </div>
@@ -44,11 +44,29 @@ export default {
             idParaVerCarta:"",
             nombreEquipo:"",
             idJugadoresSinFoto:[],
-            golesIsModificable:false
+            golesIsModificable:false,
+            golesExtra:0
         }
     },
     methods: {
-        async obtenerJugadores(nombreEquipo){
+        async addGoles(id, nombre, equipo, goles){
+            await axios.put(`http://localhost:3000/players/${id}`, {id:id, name:nombre, team:equipo, scores:goles+this.golesExtra})
+            .then(response => console.log("Modificado correctamente"));
+            this.golesExtra=0
+            this.obtenerJugadores();
+        },
+        borrarJugador(id, nombre){
+            axios.delete(`http://localhost:3000/players/${id}`)
+            .then(response => console.log("Borrado correctamente"));
+            this.golesExtra=0
+            this.idParaVerCarta="start";
+            setTimeout(()=>{ //Para que de tiempo a actualizarse
+                this.obtenerJugadores();
+            }, 10);
+            
+            
+        },
+        async obtenerJugadores(){
             await axios.get(`http://localhost:3000/players?team=${this.$route.params.nombreEquipo}`)
             .then(response => this.arrayJugadores = response.data)
             .catch(response => alert("Error al recuperar datos"+ response.status));
@@ -58,6 +76,7 @@ export default {
             return this.arrayJugadores;
         },
         establecerParaVer(id){
+            this.golesExtra=0;
             this.idParaVerCarta=id;
         },
         comprobarJugadores(){ //ver si existe foto de los jugadores
@@ -94,7 +113,6 @@ export default {
     created() {
         this.obtenerJugadores();  
         if(this.$route.name=="jugadoresEquipo"){
-            console.log("goles");
             this.golesIsModificable=true;
         }else{
             this.golesIsModificable=false;
