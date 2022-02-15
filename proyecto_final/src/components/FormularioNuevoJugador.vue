@@ -1,6 +1,7 @@
 <template >
-    <div class="col-6 offset-3">
+    <div class="col-6 offset-3 text-white">
         <Modal :objetoModal="obtenerObjetoModal" @close="this.seteoInicio"></Modal>
+        <h2>Añadir nuevo Jugador</h2>
         <div class="input-group mb-3">
                 <button class="btn btn-secondary dropdown-toggle botonEquipos" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo</button>
                 <ul class="dropdown-menu">

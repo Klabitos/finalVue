@@ -7,6 +7,7 @@ import FormularioJornada from "../views/FormularioJornada.vue"
 import Equipos from "../views/Equipos.vue"
 import Jugadores from "../views/Jugadores.vue"
 import NuevoJugador from "../views/NuevoJugadorVista.vue"
+import EliminarJugador from "../views/EliminarJugador.vue"
 const routes = [
   {
     path: '/',
@@ -48,6 +49,11 @@ const routes = [
     path: '/nuevoJugador/',
     name: 'nuevoJugador',
     component: NuevoJugador
+  },
+  {
+    path: '/eliminarJugador/',
+    name: 'eliminarJugador',
+    component: EliminarJugador
   },
 
 ]

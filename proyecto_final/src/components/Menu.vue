@@ -47,7 +47,7 @@
                              <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i> 
                              Nuevo Jugador</router-link> </li>
                         <li class="segundoLi">
-                             <router-link to="#">
+                             <router-link to="/eliminarJugador/">
                              <i class="bi bi-caret-right-fill" v-if="devolverName!='EliminarJugador'"></i>
                               <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i>
                               Eliminar Jugador</router-link> </li>
