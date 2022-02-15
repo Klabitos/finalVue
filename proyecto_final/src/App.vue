@@ -6,7 +6,7 @@
     <div class="col text-center">
       <div class="row">
         <div class="col-12 header">
-          <h1 class="display-1">La Liga</h1>
+          <h1 class="display-1 tituloLiga">La Liga</h1>
         </div>
       </div>
       <div class="row">
@@ -60,6 +60,7 @@ export default {
   color: #2c3e50;
   background-color: #212529;
   min-height: 100vh;
+  overflow-y:scroll ;
 }
 a {
   text-decoration: none !important;
@@ -71,5 +72,11 @@ a {
   margin-left: auto;
   margin-right: auto;     
   background-color: rgb(71, 71, 71);
+  }
+
+  .tituloLiga{
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+   color: white;
+   font: 1.5em Georgia, "Bitstream Charter", "URW Bookman L", "Century Schoolbook L", serif;
   }
 </style>

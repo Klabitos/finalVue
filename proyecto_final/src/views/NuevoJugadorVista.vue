@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3">
+    <div class="mt-3 pb-5">
         <FormularioNuevoJugador nombreEquipo=""></FormularioNuevoJugador>
     </div>
 </template>

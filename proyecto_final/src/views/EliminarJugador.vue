@@ -1,7 +1,7 @@
 <template>
     <div class="text-white">
         <div>
-            <h1>Eliminar Jugador</h1>
+            <h2 class="display-2 text-white mb-3">Eliminar Jugador</h2>
             <img :src="require('../assets/escudos/'+this.idEquipo+'.png')" alt="Escudo" width="200" height="200" class="ms-3 imagenEquipo mt-3" v-if="this.nombreEquipo!=''">
             <img :src="require('../assets/LaLiga.png')" alt="Escudo" width="200" height="200" class="ms-3 imagenEquipo mt-3" v-else>
             <div class="input-group mb-3 d-flex flex-row justify-content-center align-items-center mt-4">

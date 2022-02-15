@@ -1,7 +1,8 @@
 <template>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row text-white">
         <TablaClasificacion class="col-5"></TablaClasificacion>
         <SeleccionEquipo class="col-5 offset-1" v-if="this.mostrarJugadores"></SeleccionEquipo>
+        <h2 class="display-2 text-white mb-3 col-5 offset-1 mt-3" v-else>Jugadores</h2>
     </div>
   
 </template>
@@ -37,6 +38,12 @@ export default {
   },
 }
 </script>
-<style>
-    
+<style scoped>
+    h2{
+    border: 1px solid black;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: #212529;
+        height: 10%;
+    }
 </style>

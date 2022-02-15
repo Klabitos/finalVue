@@ -1,7 +1,7 @@
 <template >
     <div class="col-6 offset-3 text-white">
         <Modal :objetoModal="obtenerObjetoModal" @close="this.seteoInicio"></Modal>
-        <h2>Añadir nuevo Jugador</h2>
+        <h2 class="display-2 text-white mb-3">Nuevo Jugador</h2>
         <div class="input-group mb-3">
                 <button class="btn btn-secondary dropdown-toggle botonEquipos" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo</button>
                 <ul class="dropdown-menu">
@@ -10,14 +10,15 @@
                         <a class="dropdown-item" href="#" @click="establecerEquipo(equipo.name)">{{equipo.name}}</a>
                     </li>
                 </ul>
-                <input type="text" class="form-control" readonly v-model="this.nombreEquipoElegido">
+                <input type="text" class="form-control" v-model="nombreEquipoElegido" readonly v-if="this.nombreEquipoElegido!=''">
         </div>
+        
         <div class="input-group mb-3">
                 <input type="text" class="form-control" v-model="nombreJugador">
                 <button class="btn btn-secondary" type="button">Nombre Jugador</button>
         </div>
-        <div class="d-flex flex-row guardarGoles">
-                <div class="input-group mb-3 ">
+        <div class="d-flex flex-row guardarGoles justify-content-around">
+                <div class="input-group mb-3 d-flex flex-row">
                     <button class="btn btn-secondary" type="button" >Número de Goles</button>
                     <input type="number" class="form-control goles" v-model="goles" min="0">
                 </div>
@@ -78,7 +79,7 @@ export default {
     },
     computed:{
         obtenerObjetoModal(){
-            if(this.nombreJugador!='' && this.nombreEquipo !=''){
+            if(this.nombreJugador!='' && this.nombreEquipoElegido !=''){
                 return this.modalGreen
             }else{
                 return this.modalError
@@ -109,12 +110,12 @@ export default {
     }
 
     .guardarGoles{
-        width: 30%;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
 
     .botonEquipos{
-        width: 60%;
+        width: 100%;
     }
 </style>

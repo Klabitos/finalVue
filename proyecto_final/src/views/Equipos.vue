@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <h2 class="display-2  text-white">Equipos de la Liga</h2>
+        <h1 class="text-white mt-2">Equipos de la Liga</h1>
         <EquipoIndividual v-for="(equipo, index) in this.ordenarPorPuntos()" :key="index" :equipo="equipo" :index="index"></EquipoIndividual>             
     </div>
 </template>

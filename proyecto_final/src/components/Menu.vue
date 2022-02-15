@@ -4,7 +4,7 @@
             <hr>
             <nav class="nav ps-2 me-5">
                 <router-link to="/inicio" class="nav-link_moded ">
-                    <i class="bi bi-house" v-if="devolverName!='Inicio'"></i>
+                    <i class="bi bi-house" v-if="devolverName!='Home'"></i>
                     <i class="bi bi-house actualmenteEnEstaPagina" v-else></i>
                     Inicio
                 </router-link>
@@ -36,19 +36,19 @@
                     <i class="bi bi-building actualmenteEnEstaPagina" v-else></i>
                     Equipos</router-link>
                 <router-link to="/jugadores/todos/0" class="nav-link_moded">
-                    <i class="bi bi-file-person" v-if="devolverName!='Jugadores'"></i>
+                    <i class="bi bi-file-person" v-if="devolverName!='jugadoresEquipo'"></i>
                     <i class="bi bi-file-person actualmenteEnEstaPagina" v-else></i>
                     Jugadores
                 </router-link>
                     <ul class="d-flex flex-column align-items-start">
                         <li class="segundoLi">                          
                              <router-link to="/nuevoJugador/">
-                             <i class="bi bi-caret-right-fill" v-if="devolverName!='NuevoJugador'"></i> 
+                             <i class="bi bi-caret-right-fill" v-if="devolverName!='nuevoJugador'"></i> 
                              <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i> 
                              Nuevo Jugador</router-link> </li>
                         <li class="segundoLi">
                              <router-link to="/eliminarJugador/">
-                             <i class="bi bi-caret-right-fill" v-if="devolverName!='EliminarJugador'"></i>
+                             <i class="bi bi-caret-right-fill" v-if="devolverName!='eliminarJugador'"></i>
                               <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i>
                               Eliminar Jugador</router-link> </li>
                     </ul>

@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Inicio from "../views/Inicio.vue"
 import Home from "../views/Home.vue"
 import Clasificacion from "../views/Clasificacion.vue"
 import Jornadas from "../views/Jornadas.vue"
@@ -22,8 +21,8 @@ const routes = [
   
   {
     path: '/inicio',
-    name: 'Inicio',
-    component: Inicio
+    name: 'Home',
+    component: Home
   },
   {
     path: '/jornada/:numeroJornada',

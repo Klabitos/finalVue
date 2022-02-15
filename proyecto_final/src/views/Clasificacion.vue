@@ -4,12 +4,8 @@
       <TablaClasificacion></TablaClasificacion>
     </div>
     <div class="d-flex" v-if="clasificacionConEquipos">
-      <div class="col-5">
-        <TablaClasificacion></TablaClasificacion>
-      </div>
-      <div class="col-5 offset-1">
-        <SeleccionEquipo></SeleccionEquipo>
-      </div>
+        <TablaClasificacion class="col-5"></TablaClasificacion>
+        <SeleccionEquipo class="col-5 offset-1"></SeleccionEquipo>
     </div>
   </div>
 </template>

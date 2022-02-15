@@ -2,7 +2,7 @@
     <div>
         <DesplegableJornadas :numeroJornadas=this.obtenerNumeroJornadas() :fechasJornada=this.devolverFechasJornada() @refreshDate="refreshDate" @noDate="noDate"></DesplegableJornadas>
         <div class="d-flex justify-content-between flex-wrap">
-            <JornadaIndividual v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1, jornada.date)" :resultado2="obtenerResultadoPartido(jornada.team2, jornada.date)"></JornadaIndividual>
+            <JornadaIndividual  v-for="(jornada, index) in arrayJornadaEspecifica" :key="index" @refresh="refresh" :fechaJornada=jornada.date :idPartido="jornada.id" :numJornada="jornada.round" :idEquipo1="obtenerIdEquipo(jornada.team1)" :idEquipo2="obtenerIdEquipo(jornada.team2)" :nombreEquipo1="jornada.team1" :nombreEquipo2="jornada.team2" :resultado1="obtenerResultadoPartido(jornada.team1, jornada.date)" :resultado2="obtenerResultadoPartido(jornada.team2, jornada.date)"></JornadaIndividual>
         </div>
     </div>
     
@@ -142,6 +142,5 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style>
 </style>
