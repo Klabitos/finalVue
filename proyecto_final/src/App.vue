@@ -44,6 +44,7 @@ export default {
 
 .menu {
   border-right: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .menu {

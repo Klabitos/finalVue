@@ -47,7 +47,12 @@ export default {
             return this.listaEquipos;
         },
         mostrarJugadoresEquipo(nombreEquipo, equipoId){
-            this.$router.push({name:"Clasificacion", params: {nombreEquipo: nombreEquipo, equipoId: equipoId}});
+            if(this.$route.name=="jugadoresEquipo"){
+                this.$router.push({name:"jugadoresEquipo", params: {nombreEquipo: nombreEquipo, equipoId: equipoId}});
+            }else{
+                this.$router.push({name:"Clasificacion", params: {nombreEquipo: nombreEquipo, equipoId: equipoId}});
+            }
+            
         }
     },
     created() {

@@ -35,15 +35,15 @@
                     <i class="bi bi-building" v-if="devolverName!='equipos'"></i>
                     <i class="bi bi-building actualmenteEnEstaPagina" v-else></i>
                     Equipos</router-link>
-                <router-link to="#" class="nav-link_moded">
+                <router-link to="/jugadores/todos/0" class="nav-link_moded">
                     <i class="bi bi-file-person" v-if="devolverName!='Jugadores'"></i>
                     <i class="bi bi-file-person actualmenteEnEstaPagina" v-else></i>
                     Jugadores
                 </router-link>
                     <ul class="d-flex flex-column align-items-start">
                         <li class="segundoLi">                          
-                             <router-link to="#">
-                             <i class="bi bi-caret-right-fill" v-if="devolverName!='NewPlayer'"></i> 
+                             <router-link to="/nuevoJugador/">
+                             <i class="bi bi-caret-right-fill" v-if="devolverName!='NuevoJugador'"></i> 
                              <i class="bi bi-caret-right-fill actualmenteEnEstaPagina" v-else></i> 
                              Nuevo Jugador</router-link> </li>
                         <li class="segundoLi">

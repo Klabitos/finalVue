@@ -4,7 +4,7 @@
             <h1 class="display-5 text-white" v-text="this.$route.params.nombreEquipo"></h1>
             <img :src="require('../assets/escudos/'+this.$route.params.equipoId+'.png')" alt="Escudo" width="50" height="50"> 
         </div>
-            <div class="card mt-1" v-for="(jugador, index) in devolverJugadores()" :key="index">
+            <div class="card mt-1 cartuca" v-for="(jugador, index) in devolverJugadores()" :key="index">
                 <div class="card-header">
                     <button class="btn btn-dark" @click="establecerParaVer(jugador.id)">
                         {{jugador.name}}
@@ -15,7 +15,17 @@
                     <img src='../assets/jugadores/default.png' class="card-img-top" alt="Foto" v-else>
                 <div class="card-body">
                         <h5 class="card-title"><u>  {{$route.params.nombreEquipo}}</u>&nbsp; #{{jugador.id}}</h5>
-                        <p class="card-text">Goles: {{jugador.scores}}</p>
+                        <div>
+                            <p class="card-text">Goles: {{jugador.scores}}</p>
+                            <div v-if="golesIsModificable" class="golModificable">
+                                Añadir goles: 
+                                <input type="number" name="" id="" min="0" value="0">
+                                <button class="btn btn-secondary ms-2">Añadir</button>
+                                <br>
+                                <button class="btn btn-danger mt-3">Eliminar Jugador</button>
+                            </div>
+                        </div>
+                        
                 </div>
                 </div>
                 
@@ -31,7 +41,8 @@ export default {
             arrayJugadores:[],
             idParaVerCarta:"",
             nombreEquipo:"",
-            idJugadoresSinFoto:[]
+            idJugadoresSinFoto:[],
+            golesIsModificable:false
         }
     },
     methods: {
@@ -47,7 +58,7 @@ export default {
         establecerParaVer(id){
             this.idParaVerCarta=id;
         },
-        comprobarJugadores(){
+        comprobarJugadores(){ //ver si existe foto de los jugadores
             let idRuta;
             let error;
             this.idJugadoresSinFoto=[]
@@ -80,6 +91,12 @@ export default {
     },
     created() {
         this.obtenerJugadores();  
+        if(this.$route.name=="jugadoresEquipo"){
+            console.log("goles");
+            this.golesIsModificable=true;
+        }else{
+            this.golesIsModificable=false;
+        }
     },
     updated() {
         if(this.nombreEquipo!=this.$route.params.nombreEquipo){
@@ -111,9 +128,23 @@ export default {
         padding: 5%;
         border-radius: 10px;
     }
+    .golModificable{
+        border: 1px solid black;
+        padding: 10px;
+        background-color: rgb(71, 71, 71);
+    }
+    .cartuca{
+        padding: 2%;
+    }
 </style>
 <style scoped>
     .card-body{
         color: white;
+    }
+    input[type=number]{
+        width: 13%;
+    }
+    .paraMostrar img{
+        border: 1px solid black;
     }
 </style>

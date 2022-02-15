@@ -5,6 +5,8 @@ import Clasificacion from "../views/Clasificacion.vue"
 import Jornadas from "../views/Jornadas.vue"
 import FormularioJornada from "../views/FormularioJornada.vue"
 import Equipos from "../views/Equipos.vue"
+import Jugadores from "../views/Jugadores.vue"
+import NuevoJugador from "../views/NuevoJugadorVista.vue"
 const routes = [
   {
     path: '/',
@@ -16,6 +18,7 @@ const routes = [
     name: 'Clasificacion',
     component: Clasificacion
   },
+  
   {
     path: '/inicio',
     name: 'Inicio',
@@ -35,6 +38,16 @@ const routes = [
     path: '/equipos/',
     name: 'equipos',
     component: Equipos
+  },
+  {
+    path: '/jugadores/:nombreEquipo/:equipoId',
+    name: 'jugadoresEquipo',
+    component: Jugadores
+  },
+  {
+    path: '/nuevoJugador/',
+    name: 'nuevoJugador',
+    component: NuevoJugador
   },
 
 ]
