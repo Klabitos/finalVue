@@ -38,7 +38,7 @@
                 <input type="text" class="form-control" v-model="fechaReal" readonly>
                 <input type="text" class="form-control bg-secondary text-white" v-model="fecha" onfocus="(this.type='date')" onblur="(this.type='text')" @click="establecerFecha">             
             </div>
-            <button class="btn btn-success" @click="guardarJornada" v-if='this.jornada!="" && this.fechaReal!="" && this.equipo1.name!="" && this.equipo2.name!=""' data-bs-target="#modal" data-bs-toggle="modal">Guardar Jornada</button>
+            <button class="btn btn-success" @click="guardarJornada" v-if='this.jornada!="" && this.fecha!="Fecha" && this.fecha!="" && this.equipo1.name!="" && this.equipo2.name!=""' data-bs-target="#modal" data-bs-toggle="modal">Guardar Jornada</button>
             <button class="btn btn-success" v-else data-bs-toggle="modal" data-bs-target="#modal">Guardar Jornada</button>
             
             <!-- https://stackoverflow.com/questions/9624578/add-scrollbar-on-dropdown-menu-options/12459974  PARA EL SCROLL EN EL DROPDOWN-->
@@ -84,7 +84,7 @@ export default {
     },
     methods:{
         guardarJornada(){
-            axios.post("http://localhost:3000/matches", {round:this.jornada, date:this.fechaReal, team1:this.equipo1.name, team2:this.equipo2.name})
+            axios.post("http://localhost:3000/matches", {round:this.jornada, date:this.fecha, team1:this.equipo1.name, team2:this.equipo2.name})
             .then(response => console.log("Introducido Correctamente")); 
         },
         async obtenerTodosEquipos(){
@@ -106,13 +106,16 @@ export default {
             this.fechaReal="Fecha";
         },
         seteoInicio(){
-            setTimeout(()=>{
-                            this.jornada="";
-            this.fechaReal="";
-            this.equipo1={name:""};
-            this.equipo2={name:""};
-            this.fecha="Fecha";
+            if(this.jornada!="" && this.fecha!="Fecha" && this.fecha!="" && this.equipo1.name!="" && this.equipo2.name!=""){
+                setTimeout(()=>{
+                this.jornada="";
+                this.fechaReal="";
+                this.equipo1={name:""};
+                this.equipo2={name:""};
+                this.fecha="Fecha";
             },100);
+            }
+            
 
         }
     },
@@ -146,7 +149,7 @@ export default {
             }
         },
         obtenerObjetoModal(){
-            if(this.jornada!="" && this.fechaReal!="" && this.equipo1.name!="" && this.equipo2.name!=""){
+            if(this.jornada!="" && this.fecha!="Fecha" && this.fecha!="" && this.equipo1.name!="" && this.equipo2.name!=""){
                 return this.modalGreen
             }else{
                 return this.modalError

@@ -69,12 +69,15 @@ export default {
             .catch(response => alert("Error al recuperar datos"+ response.status));
         },
         seteoInicio(){
-            this.$emit("guardado", this.nombreEquipoElegido);
+            if(this.nombreJugador!='' && this.nombreEquipoElegido !=''){
+                this.$emit("guardado", this.nombreEquipoElegido);
             setTimeout(() => {
                 this.nombreJugador="";
                 this.nombreEquipoElegido="";
                 this.goles=0;
             }, 100);
+            }
+            
             
         },
         establecerEquipo(equipo, idEquipo){

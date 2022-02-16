@@ -1,0 +1,1 @@
+Se recomienda el uso de la bbdd.json que se encuentra en este mismo fichero por la incorporación de un jugador adicional.
