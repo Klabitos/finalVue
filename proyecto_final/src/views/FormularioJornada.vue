@@ -1,7 +1,6 @@
 <template >
 <div>
         <Modal :objetoModal="obtenerObjetoModal" @close="this.seteoInicio"></Modal>
-        <!-- <h1 class="text-white" v-show="this.exito">Se ha registrado con éxito la jornada</h1> -->
        <div class="d-flex justify-content-around align-items-center">
         <img v-if="this.equipo1.name!=''" :src="require('../assets/escudos/'+this.idEquipo1+'.png')" alt="Escudo" width="75" height="250" class="col-2"> 
         <div class="mt-5 col-5 formulario mb-3">
@@ -20,7 +19,6 @@
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Equipo 2</button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li v-for="equipo, index in this.obtenerListaEquipos" :key="index">
-                        <!-- imagen-->
                         <a class="dropdown-item" href="#" @click="establecerEquipo2(equipo)">{{equipo.name}}</a>
                     </li>
                 </ul>
@@ -40,8 +38,6 @@
             </div>
             <button class="btn btn-success" @click="guardarJornada" v-if='this.jornada!="" && this.fecha!="Fecha" && this.fecha!="" && this.equipo1.name!="" && this.equipo2.name!=""' data-bs-target="#modal" data-bs-toggle="modal">Guardar Jornada</button>
             <button class="btn btn-success" v-else data-bs-toggle="modal" data-bs-target="#modal">Guardar Jornada</button>
-            
-            <!-- https://stackoverflow.com/questions/9624578/add-scrollbar-on-dropdown-menu-options/12459974  PARA EL SCROLL EN EL DROPDOWN-->
         </div>
         <img v-if="this.equipo2.name!=''" :src="require('../assets/escudos/'+this.idEquipo2+'.png')" alt="Escudo" width="75" height="250" class="col-2"> 
         

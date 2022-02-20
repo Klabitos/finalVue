@@ -58,7 +58,7 @@ export default {
             }
         },
         async obtenerObjetosEquipos(){
-            await axios.get(`http://localhost:3000/clubs/`,{params: {name:this.nombreEquipo1}}) //sale undefined
+            await axios.get(`http://localhost:3000/clubs/`,{params: {name:this.nombreEquipo1}}) 
                 .then(response => this.equipo1 = response.data[0])
                 .catch(response => alert("Error al recuperar datos"+ response.status));
 

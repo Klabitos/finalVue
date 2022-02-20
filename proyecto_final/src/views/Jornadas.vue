@@ -36,7 +36,6 @@ export default {
         },
         refreshDate(fecha){
             this.arrayJornadaEspecifica=this.obtenerArrayJornadaEspecificaFecha(fecha); 
-            console.log(this.arrayJornadaEspecifica);
         },
         async obtenerTodasJornadas(){
             await axios.get(`http://localhost:3000/matches`)
@@ -51,7 +50,7 @@ export default {
                     this.arrayRoundJornadas.push(this.arrayJornadas[i].round);
                 }
             }  
-            return this.arrayRoundJornadas.length; //TODO REVISAR
+            return this.arrayRoundJornadas.length; 
         },
         obtenerFechasJornada(){
             this.arrayDateJornadas=[];

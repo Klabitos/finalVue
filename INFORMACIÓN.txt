@@ -1,1 +1,2 @@
 Se recomienda el uso de la bbdd.json que se encuentra en este mismo fichero por la incorporación de un jugador adicional.
+Este jugador es Iker Casillas, con id 3, al que se le asignará una foto.
